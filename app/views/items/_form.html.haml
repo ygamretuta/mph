@@ -1,0 +1,23 @@
+.row
+
+  = simple_nested_form_for([current_user, @item]) do |f|
+    = f.error_notification
+
+    .form-inputs
+      .row
+        .small-6.medium-6.columns
+          = f.input :name
+          = f.input :ad_type, collection:Item.ad_type.options
+          = f.input :description
+          = f.association :category, :selected => Category.first
+          = f.input :price
+          = f.input :phone
+        .small-6.medium-6.columns
+          %h4 Pictures
+          .items_form_pictures
+            = f.simple_fields_for :pictures
+
+          - if @item.pictures.count < 10
+            = f.link_to_add 'Add A Picture', :pictures
+    .form-actions
+      = f.button :submit

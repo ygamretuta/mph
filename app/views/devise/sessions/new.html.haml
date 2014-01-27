@@ -1,0 +1,15 @@
+.row
+  .large-5.centered.columns
+    %h2 Sign in
+    = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+      .form-inputs
+        = f.input :email, :required => false, :autofocus => true
+        = f.input :password, :required => false
+        - if devise_mapping.rememberable?
+          .input.optional.user_remember_me
+            %input{type:'hidden', value:0, name:'user[remember_me]'}
+            %input{type:'checkbox', value:1, name:'user[remember_me]', id:'user_remember_me'}
+            %label.boolean.optional.control-label.checkbox{:for=>'user_remember_me'}Remember Me
+      .form-actions
+        = f.button :submit, "Sign in"
+    = render "devise/shared/links"

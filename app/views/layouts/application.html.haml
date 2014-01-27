@@ -1,0 +1,46 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title= content_for?(:title) ? "My PH - #{yield(:title)}" : "My PH"
+    = stylesheet_link_tag "application"
+    = csrf_meta_tags
+  %body
+    %nav.top-bar{data:{topbar:true}}
+      %ul.title-area
+        %li.name
+          %h1=link_to 'MBB', root_path
+        %li.toggle-topbar.menu-icon
+          =link_to 'Menu', '#'
+      %section.top-bar-section
+        %ul.right
+          - if user_signed_in?
+            %li.divider
+            %li=link_to 'Log Out', destroy_user_session_path, method:'delete'
+            %li.divider
+            %li=link_to 'Post An Ad', new_user_item_path(current_user)
+            %li.divider
+            %li=link_to 'My Ads', user_items_path(current_user)
+          - else
+            %li.divider
+            %li=link_to 'Sign In', new_user_session_path
+            %li.divider
+            %li=link_to 'Register', new_user_registration_path
+
+
+    %section#alerts
+      - if notice
+        %p.notice.alert-box.info{data:{alert:true}}
+          = notice
+          %a.close{href:'#'}
+            ='&times;'.html_safe
+      - if alert
+        %p.alert.alert-box.warning{data:{alert:true}}
+          = alert
+          %a.close{href:'#'}
+            ='&times;'.html_safe
+    %section#content
+      = yield
+
+    = javascript_include_tag "application", 'data-turbolinks-eval' => false

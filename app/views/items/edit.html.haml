@@ -1,0 +1,6 @@
+.row
+  .large-12
+    %h1 Edit Ad
+    = render 'form'
+    = link_to 'Show', user_item_path(current_user, @item)
+    = link_to 'Back', user_items_path(current_user)

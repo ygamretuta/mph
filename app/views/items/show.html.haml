@@ -1,0 +1,29 @@
+.row
+  .large-12
+    %h2= @item.name
+
+    %ul.items_show_details
+      %li
+        Category:
+        = @item.category
+
+      - if @item.phone.present?
+        %li
+          Contact #
+          = @item.phone
+      %li
+        Price:
+        - if @item.price
+          =number_to_currency @item.price, unit:'P', :precision => (@item.price.round == @item.price) ? 0 : 2
+        - else
+          N/A
+
+    %p= @item.description
+
+    %ul.items_show_pictures{data:{clearing:true}}
+      - @item.pictures.each do |p|
+        %li= link_to image_tag(p.path.thumb.url, class:'th'), p.path.url, data:{no_turbolink:true}
+
+    = link_to 'Edit', edit_user_item_path(current_user, @item)
+    = link_to 'Delete', user_item_path(current_user, @item), :method => :delete
+    = link_to 'Back', user_items_path(current_user)
