@@ -10,7 +10,6 @@
 #  user_id     :integer
 #  price       :decimal(, )
 #  phone       :string(255)
-#  photo       :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
 #

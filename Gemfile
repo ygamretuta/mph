@@ -19,6 +19,7 @@ gem 'draper'
 gem 'mini_magick'
 gem 'nested_form'
 gem 'whenever', require:false
+gem 'faker'
 
 # rails integration of existing libraries
 gem 'masonry-rails'
@@ -49,4 +50,11 @@ group :development, :test do
   gem 'guard-annotate'
   gem 'guard-brakeman'
   gem 'guard-rspec'
+end
+
+group :test do
+  gem 'turn', require:false
+  gem 'shoulda'
+  gem 'shoulda-matchers'
+  gem 'database_cleaner'
 end

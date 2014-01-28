@@ -27,7 +27,7 @@ class Item < ActiveRecord::Base
   validates_presence_of :ad_type, :name
   validates_associated :category
   validates :pictures, length:{minimum:1, maximum: 10}
-
+  # validates :pictures, length:{maximum:10}
   def to_s
     self.name
   end

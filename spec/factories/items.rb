@@ -10,7 +10,6 @@
 #  user_id     :integer
 #  price       :decimal(, )
 #  phone       :string(255)
-#  photo       :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
 #
@@ -19,5 +18,13 @@
 
 FactoryGirl.define do
   factory :item do
+    name "Item 1"
+    ad_type "for_sale"
+    description Faker::Lorem.sentence(10)
+    category
+    user
+    price "99.99"
+    phone Faker::PhoneNumber.phone_number
+    pictures {[FactoryGirl.create(:picture)]}
   end
 end

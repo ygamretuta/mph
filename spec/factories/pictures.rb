@@ -13,7 +13,6 @@
 
 FactoryGirl.define do
   factory :picture do
-    item nil
-    path "MyString"
+    path "image_url"
   end
 end
