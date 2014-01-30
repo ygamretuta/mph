@@ -3,6 +3,5 @@
 FactoryGirl.define do
   factory :pointer do
     value "MyString"
-    item nil
   end
 end

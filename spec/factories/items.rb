@@ -20,11 +20,11 @@ FactoryGirl.define do
   factory :item do
     name "Item 1"
     ad_type "for_sale"
-    description Faker::Lorem.sentence(10)
     category
     user
     price "99.99"
     phone Faker::PhoneNumber.phone_number
     pictures {[FactoryGirl.create(:picture)]}
+    pointers {[FactoryGirl.create(:pointer)]}
   end
 end

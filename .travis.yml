@@ -1,3 +1,13 @@
 language: ruby
 rvm:
   - 2.0.0-p247
+env:
+  - DB=sqlite
+  - DB=mysql
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
+  - bundle exec rspec spec/
+before_script:
+  - mysql -e 'create database testdb'
+bundler_args: --binstubs=./bundler_stubs
