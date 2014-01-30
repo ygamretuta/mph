@@ -1,12 +1,16 @@
 #items_index
   - @items.each do |item|
     .items_index_item
-      .items_index_photo
-        = image_tag item.pictures.first.path.big_thumb.url if item.pictures.count > 0
-        .items_index_details
-          =link_to item.name, user_item_path(current_user, item)
-        - if item.price?
+      .row
+        .medium-3.columns
+          .items_index_photo
+            = image_tag item.pictures.first.path.big_thumb.url if item.pictures.count > 0
+        .medium-7.columns
+          .items_index_details
+            =link_to item.name, user_item_path(current_user, item), class:'item_name'
+        .medium-2.columns
           .items_index_price
-            =number_to_currency item.price, unit:'P', :precision => (item.price.round == item.price) ? 0 : 2
+            = number_to_currency item.price, unit:'PHP', precision:price_precision(item.price)
+
 
 

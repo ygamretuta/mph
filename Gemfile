@@ -20,6 +20,7 @@ gem 'mini_magick'
 gem 'nested_form'
 gem 'whenever', require:false
 gem 'faker'
+gem 'squeel'
 
 # rails integration of existing libraries
 gem 'masonry-rails'

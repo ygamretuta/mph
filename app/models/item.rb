@@ -18,7 +18,9 @@ class Item < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
   has_many :pictures
+  has_many :pointers
   accepts_nested_attributes_for :pictures, allow_destroy:true, reject_if: proc{|a|a['path'].blank?}
+  accepts_nested_attributes_for :pointers, allow_destroy:true, reject_if: proc{|a|a['value'].blank?}
 
   # enumerize gem declarations
   extend Enumerize
@@ -28,7 +30,13 @@ class Item < ActiveRecord::Base
   validates_associated :category
   validates :pictures, length:{minimum:1, maximum: 10}
   # validates :pictures, length:{maximum:10}
+
   def to_s
     self.name
+  end
+
+  def self.search(q)
+    keywords = q.split(" ").map{|kw| '%' + kw + '%'}
+    self.where{name.like_any keywords}
   end
 end

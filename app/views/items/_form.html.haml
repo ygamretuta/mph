@@ -8,16 +8,17 @@
         .small-6.medium-6.columns
           = f.input :name
           = f.input :ad_type, collection:Item.ad_type.options
-          = f.input :description
           = f.association :category, :selected => Category.first
           = f.input :price
           = f.input :phone
         .small-6.medium-6.columns
+          %h4 Pointers
+          .items_form_pointers#nested_pointers
+            = f.simple_fields_for :pointers
+          = f.link_to_add 'Add A Pointer', :pointers
           %h4 Pictures
-          .items_form_pictures
+          .items_form_pictures#nested_pictures
             = f.simple_fields_for :pictures
-
-          - if @item.pictures.count < 10
-            = f.link_to_add 'Add A Picture', :pictures
+          = f.link_to_add 'Add A Picture', :pictures
     .form-actions
       = f.button :submit
