@@ -46,11 +46,11 @@ group :development, :test do
   gem 'debugger'
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'factory_girl_rails'
-  gem 'rb-fsevent'
+  gem 'rb-fsevent', require:false
   gem 'capybara'
-  gem 'guard-annotate'
-  gem 'guard-brakeman'
-  gem 'guard-rspec'
+  gem 'guard-annotate', require:false
+  gem 'guard-brakeman', require:false
+  gem 'guard-rspec', require:false
 end
 
 group :test do

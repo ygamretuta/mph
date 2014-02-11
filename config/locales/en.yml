@@ -24,3 +24,10 @@ en:
   time:
     formats:
       short: "%B %d, %Y"
+  activerecord:
+    errors:
+      models:
+        picture:
+          attributes:
+            path:
+              size_too_big: "Image file is too big. Please select smaller image."

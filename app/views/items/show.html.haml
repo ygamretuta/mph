@@ -18,10 +18,6 @@
         - else
           N/A
 
-    %ul.items_show_pictures{data:{clearing:true}}
-      - @item.pictures.each do |p|
-        %li= link_to image_tag(p.path.thumb.url, class:'th'), p.path.url, data:{no_turbolink:true}
-
     = link_to 'Edit', edit_user_item_path(current_user, @item)
     = link_to 'Delete', user_item_path(current_user, @item), :method => :delete
     = link_to 'Back', user_items_path(current_user)

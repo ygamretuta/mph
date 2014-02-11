@@ -18,3 +18,5 @@
 # custom ignores
 .rbenv-gemsets
 .idea/
+
+public/uploads/

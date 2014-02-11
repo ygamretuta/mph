@@ -1,8 +1,8 @@
 .row
   .small-10.medium-10.columns
     .items_form_pictures_picture
-      - if f.object.path?
-        = image_tag f.object.path.thumb.url, class:'th'
+      - if f.object.id? && f.object.path?
+        = image_tag f.object.path.medium_thumb.url, class:'th'
       - else
         = f.input :path, label:false
   .small-2.medium-2.columns

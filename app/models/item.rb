@@ -5,7 +5,6 @@
 #  id          :integer          not null, primary key
 #  name        :string(255)
 #  ad_type     :string(255)
-#  description :text
 #  category_id :integer
 #  user_id     :integer
 #  price       :decimal(, )
@@ -28,8 +27,8 @@ class Item < ActiveRecord::Base
 
   validates_presence_of :ad_type, :name
   validates_associated :category
-  validates :pictures, length:{minimum:1, maximum: 10}
-  # validates :pictures, length:{maximum:10}
+  # validates :pictures, length:{minimum:1, maximum: 10}
+  validates :pictures, length:{maximum:10}
 
   def to_s
     self.name

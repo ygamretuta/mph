@@ -5,7 +5,6 @@
 #  id          :integer          not null, primary key
 #  name        :string(255)
 #  ad_type     :string(255)
-#  description :text
 #  category_id :integer
 #  user_id     :integer
 #  price       :decimal(, )

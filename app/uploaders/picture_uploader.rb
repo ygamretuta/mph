@@ -12,12 +12,20 @@ class PictureUploader < CarrierWave::Uploader::Base
     "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   end
 
-  version :thumb do
-    process :resize_to_fill => [200, 100]
+  version :super_big_thumb do
+    process :resize_to_fill => [502, 134]
+  end
+
+  version :medium_thumb do
+    process :resize_to_fill => [100, 100]
   end
 
   version :big_thumb do
     process :resize_to_limit => [330, 250]
+  end
+
+  version :small_thumb do
+    process :resize_to_fill => [40, 40]
   end
 
   def extension_white_list

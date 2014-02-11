@@ -2,7 +2,7 @@ $ ->
   pictureFieldsCount = undefined
   pointerFieldsCount = undefined
   maxPictureFieldsCount = 5
-  maxPointerFieldsCount = 5
+  maxPointerFieldsCount = 3
 
   $addPointerLink = $('#nested_pointers + a.add_nested_fields')
   $addPictureLink = $('#nested_pictures + a.add_nested_fields')
