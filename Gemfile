@@ -21,11 +21,14 @@ gem 'nested_form'
 gem 'whenever', require:false
 gem 'faker'
 gem 'squeel'
+gem 'kaminari'
 
 # rails integration of existing libraries
 gem 'masonry-rails'
 gem 'haml-rails'
 gem 'foundation-rails'
+gem 'jquery-ui-rails'
+gem 'jquery-qtip2-rails'
 
 group :doc do
   gem 'sdoc', require: false

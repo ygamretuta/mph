@@ -25,6 +25,9 @@ class Item < ActiveRecord::Base
   extend Enumerize
   enumerize :ad_type, in:[:for_sale, :looking_for, :swap], :default => :for_sale
 
+  # kaminari declarations
+  paginates_per 5
+
   validates_presence_of :ad_type, :name
   validates_associated :category
   # validates :pictures, length:{minimum:1, maximum: 10}

@@ -7,17 +7,21 @@
             = image_tag item.pictures.first.path.big_thumb.url, class:'th' if item.pictures.count > 0
         .medium-7.columns
           .items_index_details
-            =link_to item.name, user_item_path(current_user, item), class:'item_name'
+            =link_to item.name, user_item_path(current_user, item), class:'item_name', title:item.name
             %ul.item_pointers
               - item.pointers.each do |p|
                 %li= p.value
 
             %ul.item_thumbs
               - item.pictures.each do |p|
-                = image_tag p.path.small_thumb.url, class:'th' if p.path?
+                - if p.path?
+                  %li= link_to image_tag(p.path.small_thumb.url, class:'th'), image_path(p.path.super_big_thumb.url), class:'item_thumb'
         .medium-2.columns
           .items_index_price
             = number_to_currency item.price, unit:'PHP', precision:price_precision(item.price)
+
+.pagination-centered
+  = paginate @items
 
 
 

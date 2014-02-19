@@ -1,4 +1,6 @@
 $ ->
+
+  # multiple nested forms with field limits
   pictureFieldsCount = undefined
   pointerFieldsCount = undefined
   maxPictureFieldsCount = 5
@@ -32,3 +34,13 @@ $ ->
   pointerFieldsCount = $('#nested_pointers .fields').length
   toggleAddPictureLink()
   toggleAddPointerLink()
+
+  # tooltip
+  $('#items_index').tooltip
+    items: 'a.item_thumb'
+    content: ->
+      position:
+        my: "center bottom-20"
+        at: "center top"
+      element = $(this)
+      return '<img class="th" src="' + element.attr('href') + '"/>'

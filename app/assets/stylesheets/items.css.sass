@@ -1,11 +1,11 @@
 @import "foundation/_functions"
+@import "foundation/components/_global"
 
 #items_index
   width: 85%
   margin: 0 auto
 
 .items_index_item
-  height: 200px
   overflow: hidden
   padding:  10px
 
@@ -27,3 +27,13 @@
 
 ul.item_pointers
   list-style: square
+
+ul.item_thumbs li
+  display: inline-block
+  @include clearfix
+
+ul.item_thumbs li a
+  display: inline-block
+
+.ui-tooltip
+  max-width: 350px

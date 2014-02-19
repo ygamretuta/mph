@@ -14,8 +14,8 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
-//= require masonry/jquery.masonry
 //= require jquery_nested_form
+//= require jquery.ui.tooltip
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

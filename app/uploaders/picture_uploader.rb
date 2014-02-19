@@ -13,7 +13,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   end
 
   version :super_big_thumb do
-    process :resize_to_fill => [502, 134]
+    process :resize_to_fit => [502, 350]
   end
 
   version :medium_thumb do
