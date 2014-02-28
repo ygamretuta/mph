@@ -1,3 +1,6 @@
+.pagination-centered
+  = paginate @items
+
 #items_index
   - @items.each do |item|
     .items_index_item
@@ -7,7 +10,7 @@
             = image_tag item.pictures.first.path.big_thumb.url, class:'th' if item.pictures.count > 0
         .medium-7.columns
           .items_index_details
-            =link_to item.name, user_item_path(current_user, item), class:'item_name', title:item.name
+            %h4=item.name
             %ul.item_pointers
               - item.pointers.each do |p|
                 %li= p.value
@@ -19,6 +22,10 @@
         .medium-2.columns
           .items_index_price
             = number_to_currency item.price, unit:'PHP', precision:price_precision(item.price)
+            - if user_signed_in? && item.is_owned_by?(current_user)
+              = link_to 'Edit', edit_user_item_path(current_user, item)
+              = link_to 'Delete', user_item_path(current_user, item), :method => :delete
+
 
 .pagination-centered
   = paginate @items

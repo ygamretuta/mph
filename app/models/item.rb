@@ -30,6 +30,7 @@ class Item < ActiveRecord::Base
 
   validates_presence_of :ad_type, :name
   validates_associated :category
+  validates_associated :user
   # validates :pictures, length:{minimum:1, maximum: 10}
   validates :pictures, length:{maximum:10}
 
@@ -40,5 +41,9 @@ class Item < ActiveRecord::Base
   def self.search(q)
     keywords = q.split(" ").map{|kw| '%' + kw + '%'}
     self.where{name.like_any keywords}
+  end
+
+  def is_owned_by?(user)
+    self.user == user
   end
 end

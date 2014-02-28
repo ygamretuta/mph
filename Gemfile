@@ -22,6 +22,8 @@ gem 'whenever', require:false
 gem 'faker'
 gem 'squeel'
 gem 'kaminari'
+gem 'rails_admin'
+gem 'cancan'
 
 # rails integration of existing libraries
 gem 'masonry-rails'

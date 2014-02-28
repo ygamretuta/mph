@@ -1,4 +1,10 @@
 .row
   .large-12.medium-12.columns.large-centered.medium-centered
     = render 'search_form'
-= render :template => 'items/index', :items => @items
+
+- if @items.count > 0
+  = render :template => 'items/index', :items => @items
+- else
+  .row
+    .large-12.medium-12.columns.large-centered.medium-centered
+      %p Your search did not yield any results

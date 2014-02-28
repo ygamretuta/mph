@@ -4,6 +4,10 @@ module ApplicationHelper
   end
 
   def price_precision(price)
-    (price.round == price) ? 0 : 2
+    if price.is_a?(BigDecimal)
+      (price.round == price) ? 0 : 2
+    else
+      return nil
+    end
   end
 end
