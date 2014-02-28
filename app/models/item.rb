@@ -32,7 +32,6 @@ class Item < ActiveRecord::Base
   validates_associated :category
   validates_associated :user
   # validates :pictures, length:{minimum:1, maximum: 10}
-  validates :pictures, length:{maximum:10}
 
   def to_s
     self.name

@@ -19,6 +19,8 @@ RSpec.configure do |config|
   config.mock_with :rspec
   config.order = "random"
 
+  config.filter_run_excluding broken:true
+
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
   end

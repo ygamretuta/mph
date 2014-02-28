@@ -10,7 +10,7 @@ Mbb::Application.routes.draw do
   # resource routes
   resources :users, only:[:show, :update] do
     resources :items do
-      resources :pictures
+      resources :pictures, only:[:new, :create, :destroy]
     end
   end
 

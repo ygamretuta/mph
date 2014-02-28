@@ -13,6 +13,6 @@
 
 FactoryGirl.define do
   factory :pointer do
-    value "MyString"
+    value "This string is more than 10 chars in length"
   end
 end

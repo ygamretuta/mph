@@ -49,13 +49,14 @@ end
 
 group :development, :test do
   gem 'debugger'
+  gem 'rspec', '~> 3.0.0.beta2'
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'factory_girl_rails'
   gem 'rb-fsevent', require:false
   gem 'capybara'
   gem 'guard-annotate', require:false
   gem 'guard-brakeman', require:false
-  gem 'guard-rspec', require:false
+  gem 'guard-rspec', '~> 4.2.7', require:false
 end
 
 group :test do

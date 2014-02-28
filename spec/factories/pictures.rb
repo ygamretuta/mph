@@ -13,6 +13,6 @@
 
 FactoryGirl.define do
   factory :picture do
-    path "image_url"
+    path "image_url.jpg"
   end
 end
