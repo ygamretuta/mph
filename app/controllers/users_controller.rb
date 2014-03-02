@@ -1,12 +1,16 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show]
+  before_filter :authenticate_user!, except:[:show]
 
   # GET /users/1
   # GET /users/1.json
   def show
   end
 
-  # GET /users/1/edit
+  def profile
+  end
+
+  # GET '/edit_profile'
   def edit
   end
 
@@ -14,12 +18,13 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+      @user = User.find(current_user.id)
+      if  @user.update(user_params)
+        format.html { redirect_to current_user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: current_user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -32,6 +37,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params[:user]
+      params.require(:user).permit(:username, :email)
     end
 end
