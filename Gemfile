@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # gems bundled with Rails 4
-gem 'rails', '4.0.0'
+gem 'rails'
 gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
@@ -24,13 +24,13 @@ gem 'squeel'
 gem 'kaminari'
 gem 'rails_admin'
 gem 'cancan'
+gem 'merit'
+gem 'thin'
 
 # rails integration of existing libraries
-gem 'masonry-rails'
 gem 'haml-rails'
 gem 'foundation-rails'
 gem 'jquery-ui-rails'
-gem 'jquery-qtip2-rails'
 
 group :doc do
   gem 'sdoc', require: false
@@ -61,6 +61,7 @@ end
 
 group :test do
   gem 'turn', require:false
+  gem 'capybara-screenshot'
   gem 'shoulda'
   gem 'shoulda-matchers'
   gem 'database_cleaner'

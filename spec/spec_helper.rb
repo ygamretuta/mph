@@ -4,10 +4,14 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'capybara-screenshot/rspec'
 
 include ActionDispatch::TestProcess
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
+
+include Warden::Test::Helpers
+Warden.test_mode!
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods

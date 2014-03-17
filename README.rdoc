@@ -1,4 +1,6 @@
 {<img src="https://travis-ci.org/ygamretuta/mph.png?branch=master" alt="Build Status" />}[https://travis-ci.org/ygamretuta/mph]
 
+{<img src="https://codeclimate.com/github/ygamretuta/mph.png" />}[https://codeclimate.com/github/ygamretuta/mph]
+
 This is a personal coding project used as a way to progressively learn Ruby on Rails
 while creating a usable project.

@@ -1,0 +1,16 @@
+%h1 Listing transactions
+
+%table
+  %tr
+    %th Seller
+    %th Buyer
+    %th Item
+    %th
+    %th
+    %th
+
+  - @transactions.each do |transaction|
+    %tr
+      %td= transaction.seller.username
+      %td= transaction.buyer.username
+      %td= transaction.item.name

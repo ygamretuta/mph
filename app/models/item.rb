@@ -18,6 +18,7 @@ class Item < ActiveRecord::Base
   belongs_to :user
   has_many :pictures
   has_many :pointers
+  has_many :transactions
   accepts_nested_attributes_for :pictures, allow_destroy:true, reject_if: proc{|a|a['path'].blank?}
   accepts_nested_attributes_for :pointers, allow_destroy:true, reject_if: proc{|a|a['value'].blank?}
 
@@ -44,5 +45,9 @@ class Item < ActiveRecord::Base
 
   def is_owned_by?(user)
     self.user == user
+  end
+
+  def is_reserved_by?(user)
+    self.transactions.where(user=user).count > 0
   end
 end
