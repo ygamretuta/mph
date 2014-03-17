@@ -1,2 +1,0 @@
-class PointersController < ApplicationController
-end
