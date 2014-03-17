@@ -10,6 +10,7 @@
 .rbenv-gemsets
 .idea/
 public/uploads/
+.DS_Store
 
 *.rbc
 capybara-*.html
