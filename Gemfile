@@ -26,7 +26,7 @@ gem 'rails_admin'
 gem 'cancan'
 gem 'merit'
 gem 'thin'
-gem 'phantomjs'
+gem 'poltergeist'
 
 # rails integration of existing libraries
 gem 'haml-rails'
