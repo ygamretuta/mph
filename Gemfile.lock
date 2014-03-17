@@ -103,6 +103,9 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    dotenv (0.10.0)
+    dotenv-rails (0.10.0)
+      dotenv (= 0.10.0)
     draper (1.3.0)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
@@ -207,6 +210,7 @@ GEM
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     orm_adapter (0.5.0)
+    phantomjs (1.9.7.0)
     polyamorous (0.6.4)
       activerecord (>= 3.0)
     polyglot (0.3.4)
@@ -381,6 +385,7 @@ DEPENDENCIES
   database_cleaner
   debugger
   devise
+  dotenv-rails
   draper
   enumerize
   factory_girl_rails
@@ -399,6 +404,7 @@ DEPENDENCIES
   merit
   mini_magick
   nested_form
+  phantomjs
   quiet_assets
   rack-livereload
   rails

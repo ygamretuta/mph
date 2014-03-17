@@ -29,8 +29,7 @@ class Item < ActiveRecord::Base
   paginates_per 5
 
   validates_presence_of :ad_type, :name
-  validates_associated :category
-  validates_associated :user
+  validates_associated :pictures
   # validates :pictures, length:{minimum:1, maximum: 10}
 
   def to_s

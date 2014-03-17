@@ -26,6 +26,7 @@ gem 'rails_admin'
 gem 'cancan'
 gem 'merit'
 gem 'thin'
+gem 'phantomjs'
 
 # rails integration of existing libraries
 gem 'haml-rails'
@@ -57,6 +58,7 @@ group :development, :test do
   gem 'guard-annotate', require:false
   gem 'guard-brakeman', require:false
   gem 'guard-rspec', '~> 4.2.7', require:false
+  gem 'dotenv-rails'
 end
 
 group :test do
