@@ -11,16 +11,15 @@
 #  phone       :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
+# description  :text
 #
 
 class Item < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
   has_many :pictures
-  has_many :pointers
   has_many :transactions
   accepts_nested_attributes_for :pictures, allow_destroy:true, reject_if: proc{|a|a['path'].blank?}
-  accepts_nested_attributes_for :pointers, allow_destroy:true, reject_if: proc{|a|a['value'].blank?}
 
   # enumerize gem declarations
   extend Enumerize

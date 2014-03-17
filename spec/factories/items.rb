@@ -21,9 +21,9 @@ FactoryGirl.define do
     ad_type "for_sale"
     category
     user
+    description Faker::Lorem.paragraph
     price "99.99"
     phone Faker::PhoneNumber.phone_number
     pictures {[FactoryGirl.create(:picture)]}
-    pointers {[FactoryGirl.create(:pointer)]}
   end
 end

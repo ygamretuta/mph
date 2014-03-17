@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303114617) do
+ActiveRecord::Schema.define(version: 20140317073626) do
 
   create_table "badges_sashes", force: true do |t|
     t.integer  "badge_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20140303114617) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "description"
   end
 
   add_index "items", ["category_id"], name: "index_items_on_category_id"
@@ -84,13 +85,6 @@ ActiveRecord::Schema.define(version: 20140303114617) do
   end
 
   add_index "pictures", ["item_id"], name: "index_pictures_on_item_id"
-
-  create_table "pointers", force: true do |t|
-    t.string   "value"
-    t.integer  "item_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "sashes", force: true do |t|
     t.datetime "created_at"

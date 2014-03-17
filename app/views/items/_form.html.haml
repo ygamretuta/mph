@@ -10,11 +10,8 @@
           = f.association :category, :selected => Category.first
           = f.input :price
           = f.input :phone
+          = f.input :description
         .small-6.medium-6.columns
-          %h4 Pointers
-          .items_form_pointers#nested_pointers
-            = f.simple_fields_for :pointers
-          = f.link_to_add 'Add A Pointer', :pointers, 'data-target'=> '#nested_pointers'
           %h4 Pictures
           .items_form_pictures#nested_pictures
             = f.simple_fields_for :pictures

@@ -11,10 +11,7 @@
         .medium-7.columns
           .items_index_details
             %h4=item.name
-            %ul.item_pointers
-              - item.pointers.each do |p|
-                %li= p.value
-
+            %p= item.description
             %ul.item_thumbs
               - item.pictures.each do |p|
                 - if p.path?
