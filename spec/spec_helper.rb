@@ -4,8 +4,11 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rails'
 require 'capybara/rspec'
-require 'capybara-screenshot/rspec'
 require 'capybara/poltergeist'
+
+# coveralls service
+require 'coveralls'
+Coveralls.wear!
 
 include ActionDispatch::TestProcess
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }

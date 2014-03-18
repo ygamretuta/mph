@@ -33,6 +33,10 @@ gem 'haml-rails'
 gem 'foundation-rails'
 gem 'jquery-ui-rails'
 
+# public services
+gem 'coveralls', require:false
+
+
 group :doc do
   gem 'sdoc', require: false
 end
@@ -63,7 +67,6 @@ end
 
 group :test do
   gem 'turn', require:false
-  gem 'capybara-screenshot'
   gem 'shoulda'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
