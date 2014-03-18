@@ -19,7 +19,9 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
-    respond_with(@item = Item.new)
+    @item = Item.new
+    2.times {@item.pictures.build}
+    respond_with @item
   end
 
   # GET /items/1/edit
@@ -36,7 +38,8 @@ class ItemsController < ApplicationController
         format.html { redirect_to [current_user, @item], notice: 'Item was successfully created.' }
         format.json { render action: 'show', status: :created, location: @item }
       else
-        format.html { render action: 'new' }
+        2.times {@item.pictures.build}
+        format.html { render action: 'new', :locals => {item:@item} }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
