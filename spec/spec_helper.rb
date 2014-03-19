@@ -8,7 +8,7 @@ require 'capybara/poltergeist'
 
 # coveralls service
 require 'coveralls'
-Coveralls.wear!
+Coveralls.wear!('rails')
 
 include ActionDispatch::TestProcess
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
