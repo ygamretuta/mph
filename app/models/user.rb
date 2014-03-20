@@ -31,4 +31,18 @@ class User < ActiveRecord::Base
   has_many :sales_transactions, class_name:'Transaction', foreign_key: :seller_id
 
   validates_presence_of :username
+  validates :username, uniqueness:{case_sensitive:false}
+
+  attr_accessor :login
+
+  # override parent method to allow to searching for email or username
+  # https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions).where(['lower(username) = :value OR lower(email) = :value', {value:login.downcase}]).first
+    else
+      where(conditions.first)
+    end
+  end
 end

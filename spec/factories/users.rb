@@ -21,8 +21,11 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
+  sequence :username do |n|
+    "username_#{n}"
+  end
   factory :user do
-    username 'MyUsernameIsLong'
+    username
     email{Faker::Internet.email}
     password 'password'
     password_confirmation 'password'

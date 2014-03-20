@@ -10,4 +10,13 @@ feature "Users" do
     click_button 'Sign up'
     expect(page).to have_content 'Welcome! You have signed up successfully.'
   end
+
+  scenario 'login using username' do
+    user = FactoryGirl.create(:user)
+    visit new_user_session_path
+    fill_in 'Login', with:user.username
+    fill_in 'Password', with: user.password
+    click_button 'Sign in'
+    expect(page).to have_content 'Signed in successfully'
+  end
 end
