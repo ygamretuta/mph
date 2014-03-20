@@ -58,7 +58,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'factory_girl_rails'
   gem 'rb-fsevent', require:false
-  gem 'capybara'
+  gem 'capybara', github:'jnicklas/capybara'
   gem 'guard-annotate', require:false
   gem 'guard-brakeman', require:false
   gem 'guard-rspec', '~> 4.2.7', require:false

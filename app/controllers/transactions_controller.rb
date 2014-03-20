@@ -4,7 +4,7 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = current_user.purchase_transactions.load
+    @transactions = current_user.purchase_transactions.to_a + current_user.sales_transactions.to_a
   end
 
   # GET /transactions/1
@@ -57,9 +57,21 @@ class TransactionsController < ApplicationController
   def destroy
     @transaction.destroy
     respond_to do |format|
-      format.html { redirect_to transactions_url }
+      format.html { redirect_to user_transactions_url(current_user) }
       format.json { head :no_content }
     end
+  end
+
+  # GET '/purchases'
+  # GET '/purchases.json'
+  def purchases
+    @transactions = current_user.purchase_transactions.load
+    render :action => :index, :transactions => @transactions
+  end
+
+  def sales
+    @transactions = current_user.sales_transactions.load
+    render :action => :index, :transactions => @transactions
   end
 
   private

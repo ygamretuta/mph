@@ -1,16 +1,21 @@
-%h1 Listing transactions
-
-%table
-  %tr
-    %th Seller
-    %th Buyer
-    %th Item
-    %th
-    %th
-    %th
-
-  - @transactions.each do |transaction|
+- if @transactions.count < 1
+  %i.empty
+    You have no transactions under this category.
+- else
+  %table
     %tr
-      %td= transaction.seller.username
-      %td= transaction.buyer.username
-      %td= transaction.item.name
+      %th Seller
+      %th Buyer
+      %th Item
+      %th Date Initiated
+      %th Expected Transaction Date
+      %th Cancel Transaction?
+
+    - @transactions.each do |transaction|
+      %tr
+        %td= transaction.seller.username
+        %td= transaction.buyer.username
+        %td= transaction.item.name
+        %td= l transaction.created_at, format: :short
+        %td= l transaction.transaction_date, format: :short
+        %td= link_to 'Cancel Transaction', user_transaction_path(current_user, transaction), method: :delete

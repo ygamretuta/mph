@@ -32,8 +32,10 @@
                 %li= link_to 'Edit', edit_user_item_path(current_user, item)
                 %li= link_to 'Delete', user_item_path(current_user, item), :method => :delete
 
-            - if user_signed_in? && !item.is_owned_by?(current_user)
+            - if user_signed_in? && !item.is_reserved_by?(current_user)
               = link_to 'Reserve', new_user_item_transaction_path(current_user, item), class:'button alert tiny'
+            -elsif item.is_reserved_by?(current_user)
+              %i.reserved You have already reserved this.
 
 .pagination-centered
   = paginate @items

@@ -5,6 +5,6 @@ describe Transaction do
     user = FactoryGirl.create(:user)
     item = FactoryGirl.create(:item)
     Transaction.create(seller_id:item.user.id, buyer_id:user.id, item_id:item.id)
-    item.is_reserved_by?(user).should == true
+    expect(item.is_reserved_by?(user)).to be true
   end
 end

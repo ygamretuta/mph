@@ -17,4 +17,8 @@ Mbb::Application.routes.draw do
   get '/search' => 'pages#search', as:'search'
   get '/profile' => 'users#profile', as:'profile'
   get '/edit_profile'=> 'users#edit', as:'edit_profile'
+  get '/purchases' => 'transactions#purchases', as:'purchases'
+  get '/sales' => 'transactions#sales', as:'sales'
+  get '/:username/purchases' => 'users#purchases', as: 'user_purchases'
+  get '/:username/sales' => 'users#sales', as:'user_sales'
 end
