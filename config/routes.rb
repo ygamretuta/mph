@@ -21,4 +21,6 @@ Mbb::Application.routes.draw do
   get '/sales' => 'transactions#sales', as:'sales'
   get '/:username/purchases' => 'users#purchases', as: 'user_purchases'
   get '/:username/sales' => 'users#sales', as:'user_sales'
+  get '/buyer_confirm/:id' => 'transactions#buyer_confirm', as: 'buyer_confirm_transaction'
+  get '/seller_confirm/:id' => 'transactions#seller_confirm', as: 'seller_confirm_transaction'
 end

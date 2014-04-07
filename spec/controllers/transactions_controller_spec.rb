@@ -1,3 +1,5 @@
 require 'spec_helper'
 
-describe TransactionsController do end
+describe TransactionsController do
+
+end

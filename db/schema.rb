@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317073626) do
+ActiveRecord::Schema.define(version: 20140407075004) do
 
   create_table "badges_sashes", force: true do |t|
     t.integer  "badge_id"
@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 20140317073626) do
     t.datetime "created_at"
   end
 
-  add_index "badges_sashes", ["badge_id", "sash_id"], name: "index_badges_sashes_on_badge_id_and_sash_id"
-  add_index "badges_sashes", ["badge_id"], name: "index_badges_sashes_on_badge_id"
-  add_index "badges_sashes", ["sash_id"], name: "index_badges_sashes_on_sash_id"
+  add_index "badges_sashes", ["badge_id", "sash_id"], name: "index_badges_sashes_on_badge_id_and_sash_id", using: :btree
+  add_index "badges_sashes", ["badge_id"], name: "index_badges_sashes_on_badge_id", using: :btree
+  add_index "badges_sashes", ["sash_id"], name: "index_badges_sashes_on_sash_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20140317073626) do
     t.text     "description"
   end
 
-  add_index "items", ["category_id"], name: "index_items_on_category_id"
-  add_index "items", ["user_id"], name: "index_items_on_user_id"
+  add_index "items", ["category_id"], name: "index_items_on_category_id", using: :btree
+  add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree
 
   create_table "merit_actions", force: true do |t|
     t.integer  "user_id"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20140317073626) do
     t.datetime "updated_at"
   end
 
-  add_index "pictures", ["item_id"], name: "index_pictures_on_item_id"
+  add_index "pictures", ["item_id"], name: "index_pictures_on_item_id", using: :btree
 
   create_table "sashes", force: true do |t|
     t.datetime "created_at"
@@ -98,11 +98,14 @@ ActiveRecord::Schema.define(version: 20140317073626) do
     t.date     "transaction_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "buyer_confirmed",  default: false
+    t.boolean  "seller_confirmed", default: false
+    t.boolean  "cancelled",        default: false
   end
 
-  add_index "transactions", ["buyer_id"], name: "index_transactions_on_buyer_id"
-  add_index "transactions", ["item_id"], name: "index_transactions_on_item_id"
-  add_index "transactions", ["seller_id"], name: "index_transactions_on_seller_id"
+  add_index "transactions", ["buyer_id"], name: "index_transactions_on_buyer_id", using: :btree
+  add_index "transactions", ["item_id"], name: "index_transactions_on_item_id", using: :btree
+  add_index "transactions", ["seller_id"], name: "index_transactions_on_seller_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -122,7 +125,7 @@ ActiveRecord::Schema.define(version: 20140317073626) do
     t.integer  "level",                  default: 0
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

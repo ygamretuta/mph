@@ -217,6 +217,7 @@ GEM
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     orm_adapter (0.5.0)
+    pg (0.17.1)
     poltergeist (1.5.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -423,6 +424,7 @@ DEPENDENCIES
   merit
   mini_magick
   nested_form
+  pg
   poltergeist
   quiet_assets
   rack-livereload

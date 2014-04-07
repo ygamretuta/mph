@@ -11,7 +11,7 @@
 #  phone       :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
-# description  :text
+#  description :text
 #
 
 class Item < ActiveRecord::Base
@@ -46,6 +46,10 @@ class Item < ActiveRecord::Base
   end
 
   def is_reserved_by?(user)
-    self.transactions.where(user=user).count > 0
+    self.transactions.where('buyer_id=?', user.id).exists?
+  end
+  
+  def is_reserved?
+    self.transactions.any?
   end
 end

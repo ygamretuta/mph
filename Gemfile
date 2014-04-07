@@ -32,6 +32,7 @@ gem 'poltergeist'
 gem 'haml-rails'
 gem 'foundation-rails'
 gem 'jquery-ui-rails'
+gem 'pg'
 
 # public services
 gem 'coveralls', require:false

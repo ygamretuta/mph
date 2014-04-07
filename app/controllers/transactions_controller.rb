@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  before_action :set_transaction, only: [:show, :edit, :update, :destroy, :buyer_confirm, :seller_confirm]
 
   # GET /transactions
   # GET /transactions.json
@@ -69,9 +69,31 @@ class TransactionsController < ApplicationController
     render :action => :index, :transactions => @transactions
   end
 
+  # GET '/sales'
+  # GET '/sales.json'
   def sales
     @transactions = current_user.sales_transactions.load
     render :action => :index, :transactions => @transactions
+  end
+
+  def seller_confirm
+    respond_to do |format|
+      if @transaction.seller == current_user
+        @transaction.update(seller_confirmed:true)
+        flash[:notice] = confirm_transaction_message(@transaction)
+      end
+      format.html{redirect_to user_transactions_url(current_user)}
+    end
+  end
+
+  def buyer_confirm
+    respond_to do |format|
+      if @transaction.buyer == current_user
+        @transaction.update(buyer_confirmed:true)
+        flash[:notice] = confirm_transaction_message(@transaction)
+      end
+      format.html{redirect_to user_transactions_url(current_user)}
+    end
   end
 
   private

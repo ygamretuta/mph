@@ -20,13 +20,15 @@ Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-  config.include Devise::TestHelpers, :type => :controller
-  config.extend ControllerMacros, :type => :controller
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
   config.infer_base_class_for_anonymous_controllers = false
   config.mock_with :rspec
   config.order = "random"
+  
+  # https://github.com/plataformatec/devise/wiki/How-To:-Controllers-tests-with-Rails-3-(and-rspec)
+  config.include Devise::TestHelpers, :type => :controller
+  config.extend  ControllerMacros, :type => :controller
 
   config.filter_run_excluding broken:true
 

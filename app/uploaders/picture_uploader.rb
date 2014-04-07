@@ -9,7 +9,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    "/images/fallback/" + [version_name, "default.png"].compact.join('_')
+    ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.gif"].compact.join('_'))
   end
 
   version :super_big_thumb do

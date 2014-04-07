@@ -16,6 +16,8 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  username               :string(255)
+#  sash_id                :integer
+#  level                  :integer          default(0)
 #
 
 class User < ActiveRecord::Base

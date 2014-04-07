@@ -9,13 +9,37 @@
       %th Item
       %th Date Initiated
       %th Expected Transaction Date
-      %th Cancel Transaction?
+      %th Cancel
+      %th Confirm
 
     - @transactions.each do |transaction|
-      %tr
+      %tr.transaction
         %td= transaction.seller.username
         %td= transaction.buyer.username
         %td= transaction.item.name
         %td= l transaction.created_at, format: :short
         %td= l transaction.transaction_date, format: :short
-        %td= link_to 'Cancel Transaction', user_transaction_path(current_user, transaction), method: :delete
+        %td
+          - if transaction.cancelled?
+            Transaction is Cancelled
+          - elsif transaction.successful?
+            %i Cannot cancel successful transactions
+          - else
+            =link_to 'Cancel Transaction', user_transaction_path(current_user, transaction), method: :delete
+        %td
+          - if transaction.successful?
+            %i.empty
+              Transaction is successful.
+          - else
+            - if transaction.buyer == current_user
+              - if transaction.buyer_confirmed?
+                %i.empty
+                  Please wait for seller confirmation.
+              - else
+                = link_to 'Confirm Transaction', buyer_confirm_transaction_path(transaction)
+            - else
+              - if transaction.seller_confirmed?
+                %i.empty
+                  Please wait for buyer confirmation
+              - else
+                = link_to 'Confirm Transaction', seller_confirm_transaction_path(transaction)

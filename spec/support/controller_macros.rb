@@ -1,8 +1,10 @@
+# https://github.com/plataformatec/devise/wiki/How-To:-Controllers-tests-with-Rails-3-(and-rspec)
 module ControllerMacros
   def login_user
     before(:each) do
-      @request.env['devise_mapping'] = Devise.mappings[:user]
+      @request.env['devise.mapping'] = Devise.mappings[:user]
       @user = FactoryGirl.create(:user)
+      # user.confirm
       sign_in @user
     end
   end
