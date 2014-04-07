@@ -46,7 +46,7 @@ class Item < ActiveRecord::Base
   end
 
   def is_reserved_by?(user)
-    self.transactions.where('buyer_id=?', user.id).exists?
+    !!self.transactions.where('buyer_id=?', user.id).exists?
   end
   
   def is_reserved?

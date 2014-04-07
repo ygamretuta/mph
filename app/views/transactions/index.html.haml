@@ -36,10 +36,10 @@
                 %i.empty
                   Please wait for seller confirmation.
               - else
-                = link_to 'Confirm Transaction', buyer_confirm_transaction_path(transaction)
+                = link_to 'Confirm Transaction', buyer_confirm_transaction_path(transaction), method: :put
             - else
               - if transaction.seller_confirmed?
                 %i.empty
                   Please wait for buyer confirmation
               - else
-                = link_to 'Confirm Transaction', seller_confirm_transaction_path(transaction)
+                = link_to 'Confirm Transaction', seller_confirm_transaction_path(transaction), method: :put
