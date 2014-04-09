@@ -6,7 +6,6 @@
       .row
         .small-6.medium-6.columns
           = f.input :transaction_date, as: :string, :input_html => {id:'transaction_datepicker'}
-          = f.input :seller_id, as: :hidden, :input_html => {value:@item.user.id}
           = f.input :buyer_id, as: :hidden, :input_html => {value:current_user.id}
           = f.input :item_id, as: :hidden, :input_html => {value:@item.id}
 

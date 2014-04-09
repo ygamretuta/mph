@@ -4,7 +4,7 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = current_user.purchase_transactions.to_a + current_user.sales_transactions.to_a
+    @transactions = Transaction.where(buyer:current_user)
   end
 
   # GET /transactions/1
@@ -76,20 +76,26 @@ class TransactionsController < ApplicationController
     render :action => :index, :transactions => @transactions
   end
 
+  # PUT '/seller_confirm'
   def seller_confirm
     respond_to do |format|
       if @transaction.seller == current_user
-        @transaction.update(seller_confirmed:true)
+        unless @transaction.seller_confirmed?
+          @transaction.update(seller_confirmed:true)
+        end
         flash[:notice] = confirm_transaction_message(@transaction)
       end
       format.html{redirect_to user_transactions_url(current_user)}
     end
   end
 
+  # PUT '/buyer_confirm'
   def buyer_confirm
     respond_to do |format|
       if @transaction.buyer == current_user
-        @transaction.update(buyer_confirmed:true)
+        unless @transaction.buyer_confirmed?
+          @transaction.update(buyer_confirmed:true)
+        end
         flash[:notice] = confirm_transaction_message(@transaction)
       end
       format.html{redirect_to user_transactions_url(current_user)}
@@ -104,6 +110,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:seller_id, :buyer_id, :item_id, :transaction_date)
+      params.require(:transaction).permit(:buyer_id, :item_id, :transaction_date)
     end
 end

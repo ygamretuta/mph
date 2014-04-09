@@ -3,7 +3,6 @@
 # Table name: transactions
 #
 #  id               :integer          not null, primary key
-#  seller_id        :integer
 #  buyer_id         :integer
 #  item_id          :integer
 #  transaction_date :date
@@ -16,5 +15,27 @@
 require 'spec_helper'
 
 describe Transaction do
+  describe 'successful?' do
+    let(:transaction){FactoryGirl.create(:successful)}
 
+    it 'checks if transaction is confirmed by both parties' do
+      expect(transaction.successful?).to be true
+    end
+  end
+
+  describe 'self.cleanup' do
+    it 'destroys all transactions more than 30 days' do
+      transaction = FactoryGirl.create(:old_transaction)
+      Transaction.cleanup
+      expect(transaction).not_to exist_in_database
+    end
+  end
+
+  describe 'awaiting_confirmation?' do
+    let(:transaction){FactoryGirl.create(:awaiting_confirmation)}
+
+    it 'checks if transaction is awaiting confirmation' do
+      expect(transaction.awaiting_confirmation?).to be true
+    end
+  end
 end

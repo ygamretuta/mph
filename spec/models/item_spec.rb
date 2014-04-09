@@ -28,7 +28,7 @@ describe Item do
     it 'checks if an item is reserved by a user' do
       user = FactoryGirl.create(:user)
       item = FactoryGirl.create(:item)
-      Transaction.create(seller:item.user, buyer:user, item:item)
+      Transaction.create(buyer:user, item:item)
       expect(item.is_reserved_by?(user)).to be true
     end
   end
@@ -37,7 +37,7 @@ describe Item do
     it 'checks if an item is reserved by anyone' do
       user = FactoryGirl.create(:user)
       item = FactoryGirl.create(:item)
-      Transaction.create(seller:item.user, buyer:user, item:item)
+      Transaction.create(buyer:user, item:item)
       expect(item.is_reserved?).to be true
     end
   end

@@ -30,7 +30,6 @@ class User < ActiveRecord::Base
 
   has_many :items
   has_many :purchase_transactions, class_name:'Transaction', foreign_key: :buyer_id
-  has_many :sales_transactions, class_name:'Transaction', foreign_key: :seller_id
 
   validates_presence_of :username
   validates :username, uniqueness:{case_sensitive:false}

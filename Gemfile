@@ -26,13 +26,15 @@ gem 'rails_admin'
 gem 'cancan'
 gem 'merit'
 gem 'thin'
-gem 'poltergeist'
+gem 'sidekiq'
+gem 'foreigner'
 
 # rails integration of existing libraries
 gem 'haml-rails'
 gem 'foundation-rails'
 gem 'jquery-ui-rails'
 gem 'pg'
+gem 'poltergeist'
 
 # public services
 gem 'coveralls', require:false

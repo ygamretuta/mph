@@ -3,7 +3,7 @@ require 'spec_helper'
 describe TransactionsController do
 	login_user
 	let(:item){FactoryGirl.create(:item)}
-	let(:transaction){Transaction.create(seller:item.user, buyer:@user, item:item)}
+	let(:transaction){Transaction.create(buyer:@user, item:item)}
 
 	describe 'PUT buyer_confirm' do
 		it 'updates transaction with buyer_confirm true' do
