@@ -4,7 +4,7 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.where(buyer:current_user)
+    @transactions = Transaction.purchases(current_user).to_a + Transaction.sales(current_user).to_a
   end
 
   # GET /transactions/1
@@ -65,7 +65,7 @@ class TransactionsController < ApplicationController
   # GET '/purchases'
   # GET '/purchases.json'
   def purchases
-    @transactions = current_user.purchase_transactions.load
+    @transactions = Transaction.where(buyer:current_user)
     render :action => :index, :transactions => @transactions
   end
 

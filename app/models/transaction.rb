@@ -21,7 +21,6 @@ class Transaction < ActiveRecord::Base
 
   scope :sales, ->(user){includes(:item).where('items.user_id = ?', user.id).references(:item)}
   scope :purchases, ->(user){where(buyer:user)}
-  scope :all_user_transactions, ->(user){sales(user).purchases(user)}
 
   def seller
     item.user
