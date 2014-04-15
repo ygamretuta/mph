@@ -52,6 +52,11 @@ Mbb::Application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production.
+  if ENV['MEMCACHEDCLOUD_SERVERS']
+    config.cache_store :dalli_store, ENV['MEMCACHEDCLOUD_SERVERS'].split(','),
+                       {username:ENV['MEMCACHEDCLOUD_USERNAME'],
+                       password:ENV['MEMCACHEDCLOUD_PASSWORD']}
+  end
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
