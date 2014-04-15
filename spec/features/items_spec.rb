@@ -11,7 +11,7 @@ feature "Items" do
     visit new_user_item_path(user)
     fill_in 'Name', with:'Sample Item'
     attach_file 'item_pictures_attributes_0_path', "#{Rails.root}/app/assets/images/image.jpg"
-    click_button 'Create Item'
+    click_button 'Post Ad'
     expect(page).to have_content 'Sample Item'
   end
 end

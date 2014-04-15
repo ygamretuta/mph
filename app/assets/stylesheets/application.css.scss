@@ -12,12 +12,19 @@
  *= require foundation_and_overrides
  *= require jquery.ui.tooltip
  *= require jquery.ui.datepicker
+ *= require blueimp-file-upload
+
  *= require_tree .
 */
-
 i {
   color: #777;
 }
 .reserved{
   font-size: 0.75em;
+}
+
+.points{
+  color: #fff;
+  padding: 0 15px;
+  line-height: 45px;
 }

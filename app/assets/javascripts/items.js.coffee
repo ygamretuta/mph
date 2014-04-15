@@ -1,4 +1,4 @@
-$ ->
+ready =  ->
   pictureFieldsCount = undefined
   maxPictureFieldsCount = 5
   $addPictureLink = $('#nested_pictures + a.add_nested_fields')
@@ -26,3 +26,8 @@ $ ->
         at: "center top"
       element = $(this)
       return '<img class="th" src="' + element.attr('href') + '"/>'
+
+  $('#new_item').fileupload
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

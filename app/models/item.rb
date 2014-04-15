@@ -30,7 +30,11 @@ class Item < ActiveRecord::Base
 
   validates_presence_of :ad_type, :name
   validates_associated :pictures
+  validates_numericality_of :price, :greater_than => 0, allow_blank:true, allow_nil:true
+
   # validates :pictures, length:{minimum:1, maximum: 10}
+
+  scope :available, -> {joins(:transactions).where('transactions.buyer_confirmed IS FALSE OR transactions.seller_confirmed IS FALSE')}
 
   def to_s
     self.name
@@ -51,5 +55,13 @@ class Item < ActiveRecord::Base
   
   def is_reserved?
     self.transactions.any?
+  end
+
+  def sold?
+    self.transactions.successful.any?
+  end
+
+  def can_be_reserved_by?(user)
+    ! self.sold? && ! self.is_reserved? && ! self.is_owned_by?(user)
   end
 end

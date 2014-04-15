@@ -1,44 +1,53 @@
-.pagination-centered
-  = paginate @items
+.row
+  .large-2.medium-3.columns
+    = render 'items/filters'
 
-#items_index
-  - @items.each do |item|
-    .items_index_item
-      .row
-        .medium-3.columns
-          .items_index_photo
-            = image_tag item.pictures.first.path.big_thumb.url, class:'th' if item.pictures.count > 0
-        .medium-7.columns
-          .items_index_details
-            %h4=item.name
-            %p= item.description
-            %ul.item_thumbs
-              - item.pictures.each do |p|
-                - if p.path?
-                  %li= link_to image_tag(p.path.small_thumb.url, class:'th'), image_path(p.path.super_big_thumb.url), class:'item_thumb'
-        .medium-2.columns
-          .items_index_additional_details
-            %p.price= number_to_currency item.price, unit:'PHP', precision:price_precision(item.price)
+  .large-10.medium-9.columns
+    - if @items.any?
+      .pagination-centered
+        = paginate @items
 
-            %p.posted_by
-              - if item.is_owned_by?(current_user)
-                You posted this.
-              - else
-                Posted By:
-                = link_to item.user.username, user_path(item.user)
+      #items_index
+        - @items.each do |item|
+          .items_index_item
+            .row
+              .medium-3.columns
+                .items_index_photo
+                  = image_tag item.pictures.first.path.big_thumb.url, class:'th' if item.pictures.count > 0
+              .medium-7.columns
+                .items_index_details
+                  %h4=item.name
+                  %p.items_description= item.description
+                  %ul.item_thumbs
+                    - item.pictures.order(:created_at).to_a[1..-1].each do |p|
+                      - if p.path?
+                        %li= link_to image_tag(p.path.small_thumb.url, class:'th'), image_path(p.path.super_big_thumb.url), class:'item_thumb'
+              .medium-2.columns
+                .items_index_additional_details
+                  %p.price= number_to_currency item.price, unit:'PHP', precision:2
 
-            - if user_signed_in? && item.is_owned_by?(current_user)
-              %ul.item_index_action_links
-                %li= link_to 'Edit', edit_user_item_path(current_user, item)
-                %li= link_to 'Delete', user_item_path(current_user, item), :method => :delete
+                  %p.posted_by
+                    - if item.is_owned_by?(current_user)
+                      You posted this.
+                    - else
+                      Posted By:
+                      = link_to item.user.username, user_path(item.user)
 
-            - if user_signed_in? && !item.is_owned_by?(current_user) && !item.is_reserved? && !item.is_reserved_by?(current_user)
-              = link_to 'Reserve', new_user_item_transaction_path(current_user, item), class:'button alert tiny'
-            -elsif item.is_reserved_by?(current_user)
-              %i.reserved You have already reserved this.
+                  - if user_signed_in? && item.is_owned_by?(current_user)
+                    %ul.item_index_action_links
+                      %li= link_to 'Edit', edit_user_item_path(current_user, item)
+                      %li= link_to 'Delete', user_item_path(current_user, item), :method => :delete
 
-.pagination-centered
-  = paginate @items
+                  - if user_signed_in? && item.can_be_reserved_by?(current_user)
+                    = link_to 'Reserve', new_user_item_transaction_path(current_user, item), class:'button alert tiny'
+                  -elsif item.is_reserved_by?(current_user)
+                    %i.reserved You have already reserved this.
+
+      .pagination-centered
+        = paginate @items
+    - else
+      %p
+        %i.empty No available items.
 
 
 

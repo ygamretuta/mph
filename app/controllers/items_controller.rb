@@ -5,10 +5,10 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    if user_signed_in?
-      @items = current_user.items.load.page params[:page]
+    if params[:user_id].present?
+      @items = current_user.items.page params[:page]
     else
-      @items = Item.all.page params[:page]
+      @items = Item.available.page params[:page]
     end
   end
 

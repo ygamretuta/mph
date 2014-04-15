@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'https://rails-assets.org'
 
 # gems bundled with Rails 4
 gem 'rails'
@@ -27,7 +28,6 @@ gem 'cancan'
 gem 'merit'
 gem 'thin'
 gem 'sidekiq'
-gem 'foreigner'
 
 # rails integration of existing libraries
 gem 'haml-rails'
@@ -35,6 +35,10 @@ gem 'foundation-rails'
 gem 'jquery-ui-rails'
 gem 'pg'
 gem 'poltergeist'
+
+# rails assets
+gem 'rails-assets-blueimp-file-upload'
+gem 'rails-assets-angular'
 
 # public services
 gem 'coveralls', require:false
@@ -53,6 +57,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'guard-livereload'
   gem 'rack-livereload'
+  gem 'meta_request'
 end
 
 group :development, :test do

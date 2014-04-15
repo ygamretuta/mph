@@ -1,12 +1,9 @@
-.row
-  = simple_form_for(current_user) do |f|
-    = f.error_notification
+= simple_form_for(current_user) do |f|
+  = f.error_notification
 
-    .form-inputs
-      .row
-        .small-6.medium-6.columns
-          = f.input :username
-          = f.input :email
+  .form-inputs
+    = f.input :username
+    = f.input :email
 
-    .form-actions
-      = f.button :submit
+  .form-actions
+    = f.button :submit, 'Update Profile', class:'button tiny'

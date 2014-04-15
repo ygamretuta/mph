@@ -38,4 +38,12 @@ describe Transaction do
       expect(transaction.awaiting_confirmation?).to be true
     end
   end
+
+  describe 'assign_points_if_successful' do
+    let(:transaction){FactoryGirl.create(:successful)}
+    it 'gives 10 points to both users if transaction is successful' do
+      expect(transaction.buyer.points).to eq(10)
+      expect(transaction.seller.points).to eq(10)
+    end
+  end
 end

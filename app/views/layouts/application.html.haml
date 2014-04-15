@@ -17,6 +17,10 @@
         %ul.right
           - if user_signed_in?
             %li.divider
+            %li
+              %span.points
+                = current_user.points
+            %li.divider
             %li=link_to 'Log Out', destroy_user_session_path, method:'delete'
             %li.divider
             %li=link_to 'Post An Ad', new_user_item_path(current_user)

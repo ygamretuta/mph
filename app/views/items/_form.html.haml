@@ -1,20 +1,21 @@
-.row
-  = simple_nested_form_for([current_user, @item]) do |f|
-    = f.error_notification
+= simple_nested_form_for([current_user, @item]) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :name
+    = f.input :ad_type, collection:Item.ad_type.options
+    = f.association :category, :selected => Category.first
+    = f.input :price
+    = f.input :phone
+    = f.input :description
 
-    .form-inputs
-      .row
-        .small-6.medium-6.columns
-          = f.input :name
-          = f.input :ad_type, collection:Item.ad_type.options
-          = f.association :category, :selected => Category.first
-          = f.input :price
-          = f.input :phone
-          = f.input :description
-        .small-6.medium-6.columns
-          %h4 Pictures
-          .items_form_pictures#nested_pictures
-            = f.simple_fields_for :pictures
-          = f.link_to_add 'Add More Pictures', :pictures, 'data-target' => '#nested_pictures'
-    .form-actions
-      = f.button :submit
+    #nested_pictures
+      = f.simple_fields_for :pictures
+
+    = f.link_to_add 'Add More Pictures', :pictures, 'data-target' => '#nested_pictures', class:'items_add_pictures'
+
+
+  .form-actions
+    - if @item.id.present?
+      = f.button :submit, 'Update Ad', class:'button tiny'
+    - else
+      = f.button :submit, 'Post Ad', class:'button tiny'
