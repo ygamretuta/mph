@@ -264,6 +264,9 @@ GEM
     rails-assets-blueimp-load-image (1.11.1)
     rails-assets-blueimp-tmpl (2.5.3)
     rails-assets-jquery (2.1.0)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
     rails_admin (0.6.2)
       builder (~> 3.1)
       coffee-rails (~> 4.0)
@@ -278,6 +281,8 @@ GEM
       remotipart (~> 1.0)
       safe_yaml (~> 1.0)
       sass-rails (~> 4.0)
+    rails_serve_static_assets (0.0.2)
+    rails_stdout_logging (0.0.3)
     railties (4.0.0)
       actionpack (= 4.0.0)
       activesupport (= 4.0.0)
@@ -456,6 +461,7 @@ DEPENDENCIES
   rails
   rails-assets-angular
   rails-assets-blueimp-file-upload
+  rails_12factor
   rails_admin
   rb-fsevent
   rspec (~> 3.0.0.beta2)
