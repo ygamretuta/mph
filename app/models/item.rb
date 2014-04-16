@@ -17,8 +17,8 @@
 class Item < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
-  has_many :pictures
-  has_many :transactions
+  has_many :pictures, :dependent => :destroy
+  has_many :transactions, :dependent => :destroy
   accepts_nested_attributes_for :pictures, allow_destroy:true, reject_if: proc{|a|a['path'].blank?}
 
   # enumerize gem declarations

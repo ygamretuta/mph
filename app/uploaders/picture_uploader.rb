@@ -2,11 +2,10 @@
 
 class PictureUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  storage :file
+  include Cloudinary::CarrierWave
 
-  def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
+  process :convert => 'png'
+  process :tags => %w(post_picture)
 
   def default_url
     ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.gif"].compact.join('_'))

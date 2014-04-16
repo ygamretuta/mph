@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
-    2.times {@item.pictures.build}
+    @item.pictures.build
     respond_with @item
   end
 
@@ -38,7 +38,7 @@ class ItemsController < ApplicationController
         format.html { redirect_to [current_user, @item], notice: 'Item was successfully created.' }
         format.json { render action: 'show', status: :created, location: @item }
       else
-        2.times {@item.pictures.build}
+        @item.pictures.build
         format.html { render action: 'new', :locals => {item:@item} }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
@@ -78,7 +78,6 @@ class ItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
       params.require(:item).permit(:name, :ad_type, :description, :category_id, :price, :phone,
-                                   :pictures_attributes => [:item_id, :path, :id, :_destroy],
-                                   :pointers_attributes => [:item_id, :value, :id, :destroy])
+                                   :pictures_attributes => [:item_id, :path, :id, :_destroy])
     end
 end

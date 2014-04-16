@@ -40,8 +40,10 @@
 
                   - if user_signed_in? && item.can_be_reserved_by?(current_user)
                     = link_to 'Reserve', new_user_item_transaction_path(current_user, item), class:'button alert tiny'
-                  -elsif item.is_reserved_by?(current_user)
+                  - elsif user_signed_in? && item.is_reserved_by?(current_user)
                     %i.reserved You have already reserved this.
+                  - else
+                    %i.reserved Sign in to reserve this item.
 
       .pagination-centered
         = paginate @items

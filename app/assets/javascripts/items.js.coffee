@@ -27,7 +27,5 @@ ready =  ->
       element = $(this)
       return '<img class="th" src="' + element.attr('href') + '"/>'
 
-  $('#new_item').fileupload
-
 $(document).ready(ready)
 $(document).on('page:load', ready)
