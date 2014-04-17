@@ -3,7 +3,8 @@
 
   .form-inputs
     = f.input :username
-    = f.input :email
 
   .form-actions
     = f.button :submit, 'Update Profile', class:'button tiny'
+  %p
+    = link_to "Cancel my account", registration_path(current_user), :data => { :confirm => "Are you sure?" }, :method => :delete, class:'action_links'

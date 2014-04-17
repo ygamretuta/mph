@@ -1,8 +1,9 @@
 Mbb::Application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
-  devise_for :users, controllers:{registrations:'registrations'}
+  devise_for :users, controllers:{registrations:'registrations', omniauth_callbacks:'users/omniauth_callbacks'}
   root 'pages#index'
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   resources :items, only:[:index]
+
 
   # resource routes
   resources :users, only:[:show, :update] do

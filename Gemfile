@@ -35,6 +35,8 @@ gem 'foundation-rails'
 gem 'jquery-ui-rails'
 gem 'pg'
 gem 'poltergeist'
+gem 'mandrill-api'
+gem 'omniauth-facebook'
 
 # rails assets
 gem 'rails-assets-blueimp-file-upload'
@@ -58,6 +60,7 @@ group :development do
   gem 'guard-livereload'
   gem 'rack-livereload'
   gem 'meta_request'
+  gem 'letter_opener'
 end
 
 group :development, :test do
