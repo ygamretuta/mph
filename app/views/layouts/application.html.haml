@@ -4,13 +4,15 @@
     %meta{:charset => "utf-8"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %title= content_for?(:title) ? "My PH - #{yield(:title)}" : "My PH"
+    = favicon_link_tag
+    %link{href:'http://fonts.googleapis.com/css?family=Roboto', rel:'stylesheet', type:'text/css'}
     = stylesheet_link_tag "application"
     = csrf_meta_tags
   %body
     %nav.top-bar{data:{topbar:true}}
       %ul.title-area
         %li.name
-          %h1=link_to 'MBB', root_path
+          %h1=link_to(image_tag('logo_white.png'), root_path)
         %li.toggle-topbar.menu-icon
           =link_to 'Menu', '#'
       %section.top-bar-section

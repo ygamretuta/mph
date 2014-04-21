@@ -62,7 +62,6 @@ group :development do
   gem 'rack-livereload'
   gem 'meta_request'
   gem 'letter_opener'
-  gem 'debugger'
 end
 
 group :development, :test do
