@@ -15,4 +15,8 @@ class ApplicationController < ActionController::Base
       'Please wait for the other party to confirm transaction.'
     end
   end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to main_app.root_path, :alert => exception.message
+  end
 end

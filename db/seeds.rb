@@ -19,3 +19,10 @@ Category.create([
   {name:'Photography'},
   {name:'Clothing'}
 ])
+
+User.delete_all
+
+u = User.create(username:'admin', email:'mbb@gmail.com', password:'mbbadmin', password_confirmation:'mbbadmin')
+u.remove_role :muggle
+u.add_role :admin
+u.add_role :master_wizard

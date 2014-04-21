@@ -338,6 +338,7 @@ GEM
     request_store (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rolify (3.4.0)
     rspec (3.0.0.beta2)
       rspec-core (= 3.0.0.beta2)
       rspec-expectations (= 3.0.0.beta2)
@@ -505,6 +506,7 @@ DEPENDENCIES
   rails_12factor
   rails_admin
   rb-fsevent
+  rolify
   rspec (~> 3.0.0.beta2)
   rspec-rails (~> 3.0.0.beta)
   sass-rails (~> 4.0.0)

@@ -18,9 +18,12 @@
 #  username               :string(255)
 #  sash_id                :integer
 #  level                  :integer          default(0)
+#  provider               :string(255)
+#  uid                    :string(255)
 #
 
 class User < ActiveRecord::Base
+  rolify
   has_merit
 
   # Include default devise modules. Others available are:
@@ -30,8 +33,8 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook]
 
 
-  has_many :items
-  has_many :purchase_transactions, class_name:'Transaction', foreign_key: :buyer_id
+  has_many :items, :dependent => :destroy
+  has_many :purchase_transactions, class_name:'Transaction', foreign_key: :buyer_id, :dependent => :destroy
 
   validates_presence_of :username
   validates :username,
@@ -39,6 +42,8 @@ class User < ActiveRecord::Base
             format: { with: /\A[a-zA-Z0-9_]+\Z/ }
 
   attr_accessor :login
+
+  after_create :assign_default_role
 
   # override parent method to allow to searching for email or username
   # https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address
@@ -67,5 +72,11 @@ class User < ActiveRecord::Base
         user.email = data['email'] if user.email.blank?
       end
     end
+  end
+
+  private
+
+  def assign_default_role
+    add_role(:muggle) if self.roles.blank?
   end
 end

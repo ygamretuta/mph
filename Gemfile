@@ -28,6 +28,7 @@ gem 'cancan'
 gem 'merit'
 gem 'thin'
 gem 'sidekiq'
+gem 'rolify'
 
 # rails integration of existing libraries
 gem 'haml-rails'
@@ -61,6 +62,7 @@ group :development do
   gem 'rack-livereload'
   gem 'meta_request'
   gem 'letter_opener'
+  gem 'debugger'
 end
 
 group :development, :test do
