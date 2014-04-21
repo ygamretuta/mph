@@ -17,6 +17,7 @@
 //= require jquery_nested_form
 //= require jquery.ui.tooltip
 //= require jquery.ui.datepicker
+//= require turbolinks_transitions
 
 //= require_tree .
 

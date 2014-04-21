@@ -428,6 +428,8 @@ GEM
       polyglot (>= 0.3.1)
     turbolinks (2.2.2)
       coffee-rails
+    turbolinks_transitions (0.0.5)
+      coffee-rails
     turn (0.9.7)
       ansi
       minitest (~> 4)
@@ -505,6 +507,7 @@ DEPENDENCIES
   squeel
   thin
   turbolinks
+  turbolinks_transitions
   turn
   uglifier (>= 1.3.0)
   whenever

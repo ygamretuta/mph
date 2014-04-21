@@ -28,6 +28,7 @@ gem 'merit'
 gem 'thin'
 gem 'sidekiq'
 gem 'rolify'
+gem 'turbolinks_transitions'
 
 # rails integration of existing libraries
 gem 'haml-rails'
