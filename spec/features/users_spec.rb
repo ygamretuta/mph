@@ -8,7 +8,7 @@ feature "Users" do
     fill_in 'user[password]', with:'randompassword'
     fill_in 'user[password_confirmation]', with:'randompassword'
     click_button 'Sign up'
-    expect(page).to have_content 'Welcome! You have signed up successfully.'
+    expect(page).to have_content 'A message with a confirmation link has been sent to your email address'
   end
 
   scenario 'login using username' do

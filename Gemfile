@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-source 'https://rails-assets.org'
 
 # gems bundled with Rails 4
 gem 'rails'
@@ -38,10 +37,6 @@ gem 'pg'
 gem 'poltergeist'
 gem 'mandrill-api'
 gem 'omniauth-facebook'
-
-# rails assets
-gem 'rails-assets-blueimp-file-upload'
-gem 'rails-assets-angular'
 
 # public services
 gem 'coveralls', require:false

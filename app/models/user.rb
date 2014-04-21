@@ -20,6 +20,9 @@
 #  level                  :integer          default(0)
 #  provider               :string(255)
 #  uid                    :string(255)
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
 #
 
 class User < ActiveRecord::Base
@@ -30,7 +33,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook]
+         :omniauthable, :confirmable,
+         :omniauth_providers => [:facebook]
 
 
   has_many :items, :dependent => :destroy
@@ -52,18 +56,23 @@ class User < ActiveRecord::Base
     if login = conditions.delete(:login)
       where(conditions).where(['lower(username) = :value OR lower(email) = :value', {value:login.downcase}]).first
     else
-      where(conditions.first)
+      where(conditions).first
     end
   end
 
   def self.find_for_facebook_oauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.username = auth.info.name.delete(' ').downcase   # assuming the user model has a name
+    user = User.where(provider:auth.provider, uid:auth.uid).first
+    unless user
+      user = User.new(username:auth.info.name.delete(' ').downcase,
+        uid: auth.uid,
+        provider: auth.provider,
+        email: auth.info.email,
+        password: Devise.friendly_token[0, 20]
+      )
+      user.skip_confirmation!
+      user.save
     end
+    user
   end
 
   def self.new_with_session(params, session)

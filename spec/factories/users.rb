@@ -20,6 +20,9 @@
 #  level                  :integer          default(0)
 #  provider               :string(255)
 #  uid                    :string(255)
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -33,5 +36,6 @@ FactoryGirl.define do
     email{Faker::Internet.email}
     password 'password'
     password_confirmation 'password'
+    confirmed_at Time.now
   end
 end
