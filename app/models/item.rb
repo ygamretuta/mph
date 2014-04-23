@@ -61,7 +61,19 @@ class Item < ActiveRecord::Base
     self.transactions.successful.any?
   end
 
+  def is_for_sale?
+    self.ad_type == 'for_sale'
+  end
+
+  def is_for_swap?
+    self.ad_type == 'swap'
+  end
+
+  def is_looking_for?
+    self.ad_type == 'looking_for'
+  end
+
   def can_be_reserved_by?(user)
-    ! self.sold? && ! self.is_reserved? && ! self.is_owned_by?(user)
+    ! self.sold? && ! self.is_reserved? && ! self.is_owned_by?(user) && self.is_for_sale?
   end
 end

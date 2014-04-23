@@ -22,12 +22,11 @@ describe TransactionsController do
 
   context 'if seller logged in' do
     login_seller
-    let(:transaction){FactoryGirl.create(:transaction, item:@item)}
 
     describe 'PUT seller_confirm' do
       it 'updates transaction with seller_confirm true' do
         expect_any_instance_of(Transaction).to receive(:update).with(seller_confirmed:true)
-        put :seller_confirm, id:transaction.id
+        put :seller_confirm, id:@transaction.id
       end
     end
   end

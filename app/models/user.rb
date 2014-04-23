@@ -38,7 +38,8 @@ class User < ActiveRecord::Base
 
 
   has_many :items, :dependent => :destroy
-  has_many :purchase_transactions, class_name:'Transaction', foreign_key: :buyer_id, :dependent => :destroy
+  has_many :purchases, class_name:'Transaction', foreign_key: :buyer_id, :dependent => :destroy
+  has_many :sales, class_name:'Transaction', foreign_key: :seller_id, :dependent => :destroy
 
   validates_presence_of :username
   validates :username,
@@ -48,6 +49,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   after_create :assign_default_role
+
 
   # override parent method to allow to searching for email or username
   # https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address

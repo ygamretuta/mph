@@ -11,25 +11,21 @@
 #  seller_confirmed :boolean          default(FALSE)
 #  cancelled        :boolean          default(FALSE)
 #  buyer_id         :integer
+#  seller_id        :integer
 #
 
 class Transaction < ActiveRecord::Base
   belongs_to :buyer, class_name:'User', foreign_key: :buyer_id
+  belongs_to :seller, class_name:'User', foreign_key: :seller_id
   belongs_to :item
 
   attr_readonly :buyer
+  attr_readonly :seller
 
   after_save :assign_points_if_successful
 
-  scope :sales, ->(user){includes(:item).where('items.user_id = ?', user.id).references(:item)}
-  scope :purchases, ->(user){where(buyer:user)}
-
   # for use for querying from item
   scope :successful, -> { where(buyer_confirmed:true).where(seller_confirmed:true) }
-
-  def seller
-    item.user
-  end
 
   # for use with instance
   def successful?

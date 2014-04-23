@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, except:[:index]
+  before_action :check_if_owner, only:[:edit, :update]
 
   # GET /items
   # GET /items.json
@@ -79,5 +80,11 @@ class ItemsController < ApplicationController
     def item_params
       params.require(:item).permit(:name, :ad_type, :description, :category_id, :price, :phone,
                                    :pictures_attributes => [:item_id, :path, :id, :_destroy])
+    end
+
+    def check_if_owner
+      unless @item.is_owned_by?(current_user)
+        redirect_to root_path, alert:'You are not allowed to modify this ad.'
+      end
     end
 end

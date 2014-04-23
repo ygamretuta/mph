@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140421084157) do
+ActiveRecord::Schema.define(version: 20140423023721) do
 
   create_table "badges_sashes", force: true do |t|
     t.integer  "badge_id"
@@ -111,10 +111,12 @@ ActiveRecord::Schema.define(version: 20140421084157) do
     t.boolean  "seller_confirmed", default: false
     t.boolean  "cancelled",        default: false
     t.integer  "buyer_id"
+    t.integer  "seller_id"
   end
 
   add_index "transactions", ["buyer_id"], name: "index_transactions_on_buyer_id", using: :btree
   add_index "transactions", ["item_id"], name: "index_transactions_on_item_id", using: :btree
+  add_index "transactions", ["seller_id"], name: "index_transactions_on_seller_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

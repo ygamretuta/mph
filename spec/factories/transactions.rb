@@ -11,6 +11,7 @@
 #  seller_confirmed :boolean          default(FALSE)
 #  cancelled        :boolean          default(FALSE)
 #  buyer_id         :integer
+#  seller_id        :integer
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -18,6 +19,7 @@
 FactoryGirl.define do
   factory :transaction do
     association :buyer, factory: :user, username: 'IAmBuyer'
+    association :seller, factory: :user, username: 'IAmSeller'
     association :item
   end
 

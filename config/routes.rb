@@ -7,7 +7,7 @@ Mbb::Application.routes.draw do
 
   # resource routes
   resources :users, only:[:show, :update] do
-    resources :transactions
+    resources :transactions, only:[:index, :show]
 
     resources :items do
       resources :transactions

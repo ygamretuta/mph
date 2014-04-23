@@ -4,7 +4,15 @@ module ControllerMacros
     before(:each) do
       @request.env['devise.mapping'] = Devise.mappings[:user]
       @user = FactoryGirl.create(:user)
-      # user.confirm
+      sign_in @user
+    end
+  end
+
+  def login_user_with_item
+    before(:each) do
+      @request.env['devise.mapping'] = Devise.mappings[:user]
+      @user = FactoryGirl.create(:user)
+      @item = FactoryGirl.create(:item, user:@user)
       sign_in @user
     end
   end
@@ -13,8 +21,8 @@ module ControllerMacros
     before(:each) do
       @request.env['devise.mapping'] = Devise.mappings[:user]
       @item = FactoryGirl.create(:item)
-      @user = @item.user
-      # @user.confirm
+      @transaction = FactoryGirl.create(:transaction, item:@item)
+      @user = @transaction.seller
       sign_in @user
     end
   end

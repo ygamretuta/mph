@@ -1,0 +1,19 @@
+.row
+  .small-10.small-centered.mediun-10.medium-centered.large-10.large-centered.columns
+    = render 'search_form'
+
+    %h1 Dashboard
+
+    %ul#dashboard_stats
+      %li
+        You have
+        = current_user.purchases.count
+        purchases
+      %li
+        You have
+        = current_user.sales.count
+        sales
+      %li
+        You have
+        = @successful_transactions.count
+        successful transactions

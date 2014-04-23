@@ -995,8 +995,12 @@ $body-font-family: 'Roboto', Arial, sans-serif;
   max-width: 80rem;
 }
 
-label, input, textarea {
+body, label, input, textarea, li {
   font-family: 'Roboto', Arial, sans-serif;;
+}
+
+p{
+  font-size: 0.75rem;
 }
 
 

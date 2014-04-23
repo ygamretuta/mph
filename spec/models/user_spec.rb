@@ -18,6 +18,11 @@
 #  username               :string(255)
 #  sash_id                :integer
 #  level                  :integer          default(0)
+#  provider               :string(255)
+#  uid                    :string(255)
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
 #
 
 require 'spec_helper'

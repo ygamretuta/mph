@@ -19,9 +19,10 @@
                   %h4=item.name
                   %p.items_description= item.description
                   %ul.item_thumbs
-                    - item.pictures.order(:created_at).to_a[1..-1].each do |p|
-                      - if p.path?
-                        %li= link_to image_tag(p.path.small_thumb.url, class:'th'), image_path(p.path.super_big_thumb.url), class:'item_thumb'
+                    - if item.pictures.any?
+                      - item.pictures.order(:created_at).to_a[1..-1].each do |p|
+                        - if p.path?
+                          %li= link_to image_tag(p.path.small_thumb.url, class:'th'), image_path(p.path.super_big_thumb.url), class:'item_thumb'
               .medium-2.columns
                 .items_index_additional_details
                   %p.price= number_to_currency item.price, unit:'PHP', precision:2
@@ -38,11 +39,9 @@
                       %li= link_to 'Edit', edit_user_item_path(current_user, item)
                       %li= link_to 'Delete', user_item_path(current_user, item), :method => :delete
 
-                  - if user_signed_in? && item.can_be_reserved_by?(current_user)
-                    = link_to 'Reserve', new_user_item_transaction_path(current_user, item), class:'button alert tiny'
-                  - elsif user_signed_in? && item.is_reserved_by?(current_user)
-                    %i.reserved You have already reserved this.
-                  - else
+                  - if user_signed_in? && ! item.is_owned_by?(current_user)
+                    = get_transaction_button(item, current_user)
+                  - elsif ! user_signed_in?
                     %i.reserved Sign in to reserve this item.
 
       .pagination-centered

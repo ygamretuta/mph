@@ -1,10 +1,11 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy, :buyer_confirm, :seller_confirm]
+  before_action :check_if_can_be_reserved, only: [:new, :create]
 
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.purchases(current_user).to_a + Transaction.sales(current_user).to_a
+    @transactions = current_user.purchases | current_user.sales
   end
 
   # GET /transactions/1
@@ -65,14 +66,14 @@ class TransactionsController < ApplicationController
   # GET '/purchases'
   # GET '/purchases.json'
   def purchases
-    @transactions = Transaction.where(buyer:current_user)
+    @transactions = current_user.purchases.load
     render :action => :index, :transactions => @transactions
   end
 
   # GET '/sales'
   # GET '/sales.json'
   def sales
-    @transactions = current_user.sales_transactions.load
+    @transactions = current_user.sales.load
     render :action => :index, :transactions => @transactions
   end
 
@@ -110,6 +111,15 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:buyer_id, :item_id, :transaction_date)
+      params.require(:transaction).permit(:buyer_id, :item_id, :seller_id, :transaction_date)
     end
+
+  def check_if_can_be_reserved
+    @item = Item.find(params[:item_id])
+    if @item.is_for_sale? &&  ! @item.can_be_reserved_by?(current_user)
+      respond_to do |format|
+        format.html{redirect_to root_path}
+      end
+    end
+  end
 end
