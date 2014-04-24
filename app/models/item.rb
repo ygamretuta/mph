@@ -2,16 +2,17 @@
 #
 # Table name: items
 #
-#  id          :integer          not null, primary key
-#  name        :string(255)
-#  ad_type     :string(255)
-#  category_id :integer
-#  user_id     :integer
-#  price       :decimal(, )
-#  phone       :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
-#  description :text
+#  id             :integer          not null, primary key
+#  name           :string(255)
+#  ad_type        :string(255)
+#  category_id    :integer
+#  user_id        :integer
+#  phone          :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#  description    :text
+#  price_centavos :integer          default(0), not null
+#  price_currency :string(255)      default("PHP"), not null
 #
 
 class Item < ActiveRecord::Base
@@ -25,12 +26,14 @@ class Item < ActiveRecord::Base
   extend Enumerize
   enumerize :ad_type, in:[:for_sale, :looking_for, :swap], :default => :for_sale
 
+  # money_rails
+  monetize :price_centavos, allow_nil:true, numericality:{greater_than:0}
+
   # kaminari declarations
   paginates_per 5
 
   validates_presence_of :ad_type, :name
   validates_associated :pictures
-  validates_numericality_of :price, :greater_than => 0, allow_blank:true, allow_nil:true
 
   # validates :pictures, length:{minimum:1, maximum: 10}
 

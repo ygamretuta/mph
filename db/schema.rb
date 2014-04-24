@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424015417) do
+ActiveRecord::Schema.define(version: 20140424125032) do
 
   create_table "badges_sashes", force: true do |t|
     t.integer  "badge_id"
@@ -35,11 +35,12 @@ ActiveRecord::Schema.define(version: 20140424015417) do
     t.string   "ad_type"
     t.integer  "category_id"
     t.integer  "user_id"
-    t.decimal  "price"
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+    t.integer  "price_centavos", default: 0,     null: false
+    t.string   "price_currency", default: "PHP", null: false
   end
 
   add_index "items", ["category_id"], name: "index_items_on_category_id", using: :btree

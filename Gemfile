@@ -38,6 +38,7 @@ gem 'pg'
 gem 'poltergeist'
 gem 'mandrill-api'
 gem 'omniauth-facebook'
+gem 'money-rails'
 
 # public services
 gem 'coveralls', require:false
