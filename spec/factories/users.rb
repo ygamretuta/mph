@@ -23,6 +23,7 @@
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  allowed_ads_today      :integer          default(2)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -37,5 +38,6 @@ FactoryGirl.define do
     password 'password'
     password_confirmation 'password'
     confirmed_at Time.now
+    allowed_ads_today 2
   end
 end

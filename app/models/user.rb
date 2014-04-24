@@ -23,6 +23,7 @@
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  allowed_ads_today      :integer          default(2)
 #
 
 class User < ActiveRecord::Base

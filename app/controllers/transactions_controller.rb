@@ -1,4 +1,5 @@
 class TransactionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_transaction, only: [:show, :edit, :update, :destroy, :buyer_confirm, :seller_confirm]
   before_action :check_if_can_be_reserved, only: [:new, :create]
 

@@ -40,6 +40,26 @@ describe ItemsController do
     end
   end
 
+  describe 'POST create' do
+    describe 'with valid params' do
+      subject{post :create, user_id:user.id, item:valid_attributes}
+
+      it 'redirects to item show' do
+        expect(subject).to redirect_to user_item_path(user, Item.last)
+      end
+
+      it 'creates an Item' do
+        # using subject here does not work
+        expect{post :create, user_id:user.id, item:valid_attributes}.to change(Item, :count).by(1)
+      end
+
+      it 'decreases allowed ads count by 1' do
+        # login_with_user creates an item for the user, so we can immediately check it here
+        expect(user.allowed_ads_today).to eq(1)
+      end
+    end
+  end
+
   describe 'PUT update' do
     describe 'with valid params' do
       it 'updates the requested item' do
@@ -52,7 +72,7 @@ describe ItemsController do
         expect(response).to redirect_to([user, item])
       end
 
-      it 'redirects to the picture' do
+      it 'redirects to the item' do
         put :update, {id:item.id, item:valid_attributes, user_id:user.id}
         expect(response).to redirect_to([user, item])
       end

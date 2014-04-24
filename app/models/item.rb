@@ -36,6 +36,8 @@ class Item < ActiveRecord::Base
 
   scope :available, -> {joins(:transactions).where('transactions.buyer_confirmed IS FALSE OR transactions.seller_confirmed IS FALSE')}
 
+  after_create :decrease_allowed_ads
+
   def to_s
     self.name
   end
@@ -75,5 +77,15 @@ class Item < ActiveRecord::Base
 
   def can_be_reserved_by?(user)
     ! self.sold? && ! self.is_reserved? && ! self.is_owned_by?(user) && self.is_for_sale?
+  end
+
+  private
+
+  def decrease_allowed_ads
+    user = self.user
+    allowed_ads = user.allowed_ads_today
+    if user.allowed_ads_today > 0
+      user.update(allowed_ads_today:allowed_ads - 1)
+    end
   end
 end
