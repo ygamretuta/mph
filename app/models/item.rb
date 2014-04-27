@@ -13,6 +13,7 @@
 #  description    :text
 #  price_centavos :integer          default(0), not null
 #  price_currency :string(255)      default("PHP"), not null
+#  status         :string(255)
 #
 
 class Item < ActiveRecord::Base
@@ -22,14 +23,15 @@ class Item < ActiveRecord::Base
   has_many :transactions, :dependent => :destroy
   accepts_nested_attributes_for :pictures, allow_destroy:true, reject_if: proc{|a|a['path'].blank?}
 
-  # enumerize gem declarations
+  # enumerize
   extend Enumerize
   enumerize :ad_type, in:[:for_sale, :looking_for, :swap], :default => :for_sale
+  enumerize :status, in:[:active, :inactive, :sold], :default => :active
 
   # money_rails
   monetize :price_centavos, allow_nil:true, numericality:{greater_than:0}
 
-  # kaminari declarations
+  # kaminari
   paginates_per 5
 
   validates_presence_of :ad_type, :name
@@ -80,6 +82,18 @@ class Item < ActiveRecord::Base
 
   def can_be_reserved_by?(user)
     ! self.sold? && ! self.is_reserved? && ! self.is_owned_by?(user) && self.is_for_sale?
+  end
+
+  def sold?
+    self.status == 'sold'
+  end
+
+  def active?
+    self.status == 'active'
+  end
+
+  def inactive?
+    self.status == 'inactive'
   end
 
   private

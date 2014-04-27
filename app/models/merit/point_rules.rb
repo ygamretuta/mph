@@ -23,6 +23,10 @@ module Merit
       #   'comments#create',
       #   'photos#create'
       # ]
+      score 10, :on => ['transactions#update', 'transactions#create', 'transactions#buyer_confirm', 'transactions#seller_confirm'],
+            to: [:buyer, :seller], category:'transaction_activity'  do |transaction|
+        transaction.successful?
+      end
     end
   end
 end

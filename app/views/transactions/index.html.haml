@@ -1,49 +1,51 @@
 .row
-  .medium-12.medium-centered.columns
-  - if @transactions.count < 1
-    %i.empty
-      You have no transactions under this category.
-  - else
-    %table
-      %thead
-        %tr
-          %th Seller
-          %th Buyer
-          %th Item
-          %th Date Initiated
-          %th Expected Transaction Date
-          %th Cancel
-          %th Confirm
+  .medium-11.medium-centered.columns
+    - if @transactions.count < 1
+      %i.empty
+        You have no transactions under this category.
+    - else
+      %table
+        %thead
+          %tr
+            %th Seller
+            %th Buyer
+            %th Item
+            %th Type
+            %th Date Initiated
+            %th Expected Transaction Date
+            %th Cancel
+            %th Confirm
 
-      %tbody
-        - @transactions.each do |transaction|
-          %tr.transaction
-            %td= transaction.seller.username
-            %td= transaction.buyer.username
-            %td= transaction.item.name
-            %td= l transaction.created_at, format: :short
-            %td= l transaction.transaction_date, format: :short
-            %td
-              - if transaction.cancelled?
-                Transaction is Cancelled
-              - elsif transaction.successful?
-                %i Cannot cancel successful transactions
-              - else
-                =link_to 'Cancel Transaction', user_transaction_path(current_user, transaction), method: :delete
-            %td
-              - if transaction.successful?
-                %i.empty
-                  Transaction is successful.
-              - else
-                - if transaction.buyer == current_user
-                  - if transaction.buyer_confirmed?
-                    %i.empty
-                      Please wait for seller confirmation.
-                  - else
-                    = link_to 'Confirm Transaction', buyer_confirm_transaction_path(transaction), method: :put
+        %tbody
+          - @transactions.each do |transaction|
+            %tr.transaction
+              %td= transaction.seller.username
+              %td= transaction.buyer.username
+              %td= transaction.item.name
+              %td= transaction.item.ad_type.humanize
+              %td= l transaction.created_at, format: :short
+              %td= l transaction.transaction_date, format: :short
+              %td
+                - if transaction.cancelled?
+                  Transaction is Cancelled
+                - elsif transaction.successful?
+                  %i Cannot cancel successful transactions
                 - else
-                  - if transaction.seller_confirmed?
-                    %i.empty
-                      Please wait for buyer confirmation
+                  =link_to 'Cancel', user_item_transaction_path(current_user, transaction.item, transaction), method: :delete
+              %td
+                - if transaction.successful?
+                  %i.empty
+                    Transaction is successful.
+                - else
+                  - if transaction.buyer == current_user
+                    - if transaction.buyer_confirmed?
+                      %i.empty
+                        Please wait for seller confirmation.
+                    - else
+                      = link_to 'Confirm', buyer_confirm_transaction_path(transaction), method: :put
                   - else
-                    = link_to 'Confirm Transaction', seller_confirm_transaction_path(transaction), method: :put
+                    - if transaction.seller_confirmed?
+                      %i.empty
+                        Please wait for buyer confirmation
+                    - else
+                      = link_to 'Confirm', seller_confirm_transaction_path(transaction), method: :put

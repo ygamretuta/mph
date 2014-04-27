@@ -51,6 +51,16 @@ class User < ActiveRecord::Base
 
   after_create :assign_default_role
 
+  #mailboxer
+  acts_as_messageable
+  def name
+    self.username
+  end
+
+  def mailboxer_email(object)
+    self.email
+  end
+
 
   # override parent method to allow to searching for email or username
   # https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address

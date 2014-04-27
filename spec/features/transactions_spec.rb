@@ -13,7 +13,7 @@ feature "Transactions" do
 
   scenario 'confirm transaction', js:true do
     create_transaction
-    first('.transaction').click_link('Confirm Transaction')
+    first('.transaction').click_link('Confirm')
     expect(page).to have_content 'Please wait for seller confirmation.'
   end
 
@@ -30,6 +30,6 @@ feature "Transactions" do
     expect(page).to have_content item.name
     page.execute_script("$('#transaction_datepicker').val('24-07-2014')")
     click_button 'Create Transaction'
-    expect(page).to have_selector(:link_or_button, 'Confirm Transaction')
+    expect(page).to have_selector(:link_or_button, 'Confirm')
   end
 end

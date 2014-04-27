@@ -29,6 +29,9 @@ gem 'thin'
 gem 'sidekiq'
 gem 'rolify'
 gem 'turbolinks_transitions'
+gem 'mailboxer'
+gem 'public_activity'
+gem 'validates_timeliness', '~> 3.0'
 
 # rails integration of existing libraries
 gem 'haml-rails'

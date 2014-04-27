@@ -17,11 +17,10 @@
 require 'spec_helper'
 
 describe Transaction do
+  let(:successful){FactoryGirl.create(:successful)}
   describe 'successful?' do
-    let(:transaction){FactoryGirl.create(:successful)}
-
     it 'checks if transaction is confirmed by both parties' do
-      expect(transaction.successful?).to be true
+      expect(successful.successful?).to be true
     end
   end
 
@@ -41,11 +40,9 @@ describe Transaction do
     end
   end
 
-  describe 'assign_points_if_successful' do
-    let(:transaction){FactoryGirl.create(:successful)}
-    it 'gives 10 points to both users if transaction is successful' do
-      expect(transaction.buyer.points).to eq(10)
-      expect(transaction.seller.points).to eq(10)
+  describe 'mark_as_sold_if successful' do
+    it 'marks item as sold if transaction is successful' do
+      expect(successful.item.sold?).to be true
     end
   end
 end

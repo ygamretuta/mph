@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424125032) do
+ActiveRecord::Schema.define(version: 20140427045833) do
 
   create_table "badges_sashes", force: true do |t|
     t.integer  "badge_id"
@@ -30,6 +30,12 @@ ActiveRecord::Schema.define(version: 20140424125032) do
     t.datetime "updated_at"
   end
 
+  create_table "conversations", force: true do |t|
+    t.string   "subject",    default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
   create_table "items", force: true do |t|
     t.string   "name"
     t.string   "ad_type"
@@ -41,6 +47,7 @@ ActiveRecord::Schema.define(version: 20140424125032) do
     t.text     "description"
     t.integer  "price_centavos", default: 0,     null: false
     t.string   "price_currency", default: "PHP", null: false
+    t.string   "status"
   end
 
   add_index "items", ["category_id"], name: "index_items_on_category_id", using: :btree
@@ -78,6 +85,26 @@ ActiveRecord::Schema.define(version: 20140424125032) do
     t.string  "category", default: "default"
   end
 
+  create_table "notifications", force: true do |t|
+    t.string   "type"
+    t.text     "body"
+    t.string   "subject",              default: ""
+    t.integer  "sender_id"
+    t.string   "sender_type"
+    t.integer  "conversation_id"
+    t.boolean  "draft",                default: false
+    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                           null: false
+    t.integer  "notified_object_id"
+    t.string   "notified_object_type"
+    t.string   "notification_code"
+    t.string   "attachment"
+    t.boolean  "global",               default: false
+    t.datetime "expires"
+  end
+
+  add_index "notifications", ["conversation_id"], name: "index_notifications_on_conversation_id", using: :btree
+
   create_table "pictures", force: true do |t|
     t.integer  "item_id"
     t.string   "path"
@@ -86,6 +113,20 @@ ActiveRecord::Schema.define(version: 20140424125032) do
   end
 
   add_index "pictures", ["item_id"], name: "index_pictures_on_item_id", using: :btree
+
+  create_table "receipts", force: true do |t|
+    t.integer  "receiver_id"
+    t.string   "receiver_type"
+    t.integer  "notification_id",                            null: false
+    t.boolean  "is_read",                    default: false
+    t.boolean  "trashed",                    default: false
+    t.boolean  "deleted",                    default: false
+    t.string   "mailbox_type",    limit: 25
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  add_index "receipts", ["notification_id"], name: "index_receipts_on_notification_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -153,5 +194,9 @@ ActiveRecord::Schema.define(version: 20140424125032) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+
+  add_foreign_key "notifications", "conversations", name: "notifications_on_conversation_id"
+
+  add_foreign_key "receipts", "notifications", name: "receipts_on_notification_id"
 
 end

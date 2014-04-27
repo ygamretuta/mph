@@ -9,6 +9,11 @@
         %ul#dashboard_stats
           %li
             You have
+            = @notifications.count
+            notifications
+
+          %li
+            You have
             = current_user.purchases.count
             purchases
           %li

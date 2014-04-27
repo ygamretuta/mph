@@ -31,3 +31,7 @@ en:
           attributes:
             path:
               size_too_big: "Image file is too big. Please select smaller image."
+        transaction:
+          attributes:
+            transaction_date:
+              on_or_after: "Transaction date must be today or in the future."

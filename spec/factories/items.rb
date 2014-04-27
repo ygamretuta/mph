@@ -13,6 +13,7 @@
 #  description    :text
 #  price_centavos :integer          default(0), not null
 #  price_currency :string(255)      default("PHP"), not null
+#  status         :string(255)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

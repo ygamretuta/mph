@@ -18,9 +18,10 @@
 
 FactoryGirl.define do
   factory :transaction do
-    association :buyer, factory: :user, username: 'IAmBuyer'
-    association :seller, factory: :user, username: 'IAmSeller'
+    association :buyer, factory: :user
+    association :seller, factory: :user
     association :item
+    transaction_date Date.tomorrow
   end
 
   factory :old_transaction, parent: :transaction do
