@@ -29,3 +29,7 @@ ActionMailer::Base.smtp_settings = {
     :authentication => :plain
 }
 ActionMailer::Base.delivery_method = :smtp
+
+# elasticsearch-rails
+ENV['ELASTICSEARCH_URL'] = ENV['SEARCHBOX_URL']
+Elasticsearch::Model.client = Elasticsearch::Client.new log:true, host:'myph.herokuapp.com'

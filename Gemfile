@@ -89,5 +89,4 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'dalli'
-  gem 'bonsai-elasticsearch-rails', '~> 0.0.4'
 end
