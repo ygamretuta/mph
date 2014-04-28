@@ -9,6 +9,6 @@ class PagesController < ApplicationController
 
   def search
     q = params[:q]
-    @items = Item.search(q).page(params[:page]).records
+    @items = Item.search(q, operator:'or', page:params[:page])
   end
 end

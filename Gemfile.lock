@@ -129,17 +129,12 @@ GEM
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       request_store (~> 1.0.3)
-    elasticsearch (1.0.1)
-      elasticsearch-api (= 1.0.1)
-      elasticsearch-transport (= 1.0.1)
-    elasticsearch-api (1.0.1)
+    elasticsearch (0.4.11)
+      elasticsearch-api (= 0.4.11)
+      elasticsearch-transport (= 0.4.11)
+    elasticsearch-api (0.4.11)
       multi_json
-    elasticsearch-model (0.1.1)
-      activesupport (> 3)
-      elasticsearch (> 0.4)
-      hashie
-    elasticsearch-rails (0.1.1)
-    elasticsearch-transport (1.0.1)
+    elasticsearch-transport (0.4.11)
       faraday
       multi_json
     em-websocket (0.5.1)
@@ -404,6 +399,10 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    searchkick (0.7.2)
+      activemodel
+      elasticsearch (~> 0.4.11)
+      hashie
     sexp_processor (4.4.3)
     shoulda (3.5.0)
       shoulda-context (~> 1.0, >= 1.0.1)
@@ -502,8 +501,6 @@ DEPENDENCIES
   devise
   dotenv-rails
   draper
-  elasticsearch-model
-  elasticsearch-rails
   enumerize
   factory_girl_rails
   faker
@@ -541,6 +538,7 @@ DEPENDENCIES
   rspec-rails (~> 3.0.0.beta)
   sass-rails (~> 4.0.0)
   sdoc
+  searchkick
   shoulda
   shoulda-matchers
   sidekiq

@@ -20,7 +20,6 @@ gem 'mini_magick'
 gem 'nested_form'
 gem 'whenever', require:false
 gem 'faker'
-# gem 'squeel'
 gem 'kaminari'
 gem 'rails_admin'
 gem 'cancan'
@@ -32,6 +31,7 @@ gem 'turbolinks_transitions'
 gem 'mailboxer'
 gem 'public_activity'
 gem 'validates_timeliness', '~> 3.0'
+gem 'searchkick'
 
 # rails integration of existing libraries
 gem 'haml-rails'
@@ -42,8 +42,6 @@ gem 'poltergeist'
 gem 'mandrill-api'
 gem 'omniauth-facebook'
 gem 'money-rails'
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
 
 # public services
 gem 'coveralls', require:false

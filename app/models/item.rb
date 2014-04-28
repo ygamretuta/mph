@@ -34,9 +34,8 @@ class Item < ActiveRecord::Base
   # kaminari
   paginates_per 5
 
-  #elasticsearch
-  require 'elasticsearch/model'
-  include Elasticsearch::Model
+  #searchkick
+  searchkick
 
   validates_presence_of :ad_type, :name
   validates_associated :pictures
