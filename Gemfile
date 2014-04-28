@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # gems bundled with Rails 4
-gem 'rails'
+gem 'rails', '4.1'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -20,7 +20,7 @@ gem 'mini_magick'
 gem 'nested_form'
 gem 'whenever', require:false
 gem 'faker'
-gem 'squeel'
+# gem 'squeel'
 gem 'kaminari'
 gem 'rails_admin'
 gem 'cancan'
@@ -42,6 +42,8 @@ gem 'poltergeist'
 gem 'mandrill-api'
 gem 'omniauth-facebook'
 gem 'money-rails'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 # public services
 gem 'coveralls', require:false

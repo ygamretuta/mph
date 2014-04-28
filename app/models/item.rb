@@ -34,6 +34,10 @@ class Item < ActiveRecord::Base
   # kaminari
   paginates_per 5
 
+  #elasticsearch
+  require 'elasticsearch/model'
+  include Elasticsearch::Model
+
   validates_presence_of :ad_type, :name
   validates_associated :pictures
 
@@ -45,11 +49,6 @@ class Item < ActiveRecord::Base
 
   def to_s
     self.name
-  end
-
-  def self.search(q)
-    keywords = q.split(" ").map{|kw| '%' + kw + '%'}
-    self.where{name.like_any keywords}
   end
 
   def is_owned_by?(user)
