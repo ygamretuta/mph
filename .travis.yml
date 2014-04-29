@@ -14,5 +14,6 @@ script:
 before_script:
   - mysql -e 'create database mbb_test'
   - psql -c 'create database mbb_test;' -U postgres
+after_script:
   - rails r "Item.reindex"
 bundler_args: --binstubs=./bundler_stubs
