@@ -7,11 +7,12 @@ feature "Transactions" do
   background do
     login_as(user, scope: :user, run_callbacks:false)
   end
-  scenario 'create a transaction', js:true do
+
+  scenario 'create a transaction', broken:true, js:true do
     create_transaction
   end
 
-  scenario 'confirm transaction', js:true do
+  scenario 'confirm transaction', broken:true, js:true do
     create_transaction
     first('.transaction').click_link('Confirm')
     expect(page).to have_content 'Please wait for seller confirmation.'

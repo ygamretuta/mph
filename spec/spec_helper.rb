@@ -38,6 +38,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
+    Item.reindex
   end
 
   config.before(:each, js:true) do

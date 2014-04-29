@@ -19,13 +19,18 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
+  sequence :name do |n|
+      "item_#{n}"
+  end
+
   factory :item do
-    name "Item 1"
+    name
     ad_type "for_sale"
     category
     user
     description Faker::Lorem.paragraph
     phone Faker::PhoneNumber.phone_number
     pictures {[FactoryGirl.create(:picture)]}
+    status 'active'
   end
 end

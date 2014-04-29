@@ -35,7 +35,7 @@ class Item < ActiveRecord::Base
   paginates_per 5
 
   #searchkick
-  searchkick
+  searchkick word_start: [:name]
 
   validates_presence_of :ad_type, :name
   validates_associated :pictures

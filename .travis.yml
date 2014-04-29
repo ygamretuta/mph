@@ -10,7 +10,6 @@ services:
 script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
-  - bundle exec rake searchkick:reindex:all
   - bundle exec rspec spec/
 before_script:
   - mysql -e 'create database mbb_test'
