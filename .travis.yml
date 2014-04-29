@@ -11,6 +11,7 @@ script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
   - bundle exec rspec spec/
+  - rails runner -e test "Item.reindex"
 before_script:
   - mysql -e 'create database mbb_test'
   - psql -c 'create database mbb_test;' -U postgres
