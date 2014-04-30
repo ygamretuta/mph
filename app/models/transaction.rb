@@ -29,7 +29,8 @@ class Transaction < ActiveRecord::Base
   validates_date :transaction_date, :on_or_after => Date.today
 
   # for use for querying from item
-  scope :successful, -> { where(buyer_confirmed:true).where(seller_confirmed:true) }
+  scope :successful, -> {where('buyer_confirmed IS TRUE AND seller_confirmed IS TRUE')}
+  scope :pending, -> {where('buyer_confirmed IS FALSE OR seller_confirmed IS FALSE')}
 
   # for use with instance
   def successful?
@@ -53,12 +54,16 @@ class Transaction < ActiveRecord::Base
   end
 
   def notify_poster
-    if self.item.is_for_sale?
-      self.seller.notify('Item Reservation', "#{self.buyer.username} has reserved your #{self.item.name}")
-    elsif self.item.is_for_swap?
-      self.buyer.notify('Swap Proposal', "#{self.buyer.username} has proposed a swap for your #{self.item.name}")
-    elsif self.item.is_looking_for?
-      self.buyer.notify('Item Offer', "#{self.buyer.username} has offered you a #{self.item.name}")
+    buyer = self.buyer
+    seller = self.seller
+    item = self.item
+
+    if item.is_for_sale?
+      seller.notify('Item Reservation', "#{buyer.username} has reserved your #{item.name}")
+    elsif item.is_for_swap?
+      buyer.notify('Swap Proposal', "#{buyer.username} has proposed a swap for your #{item.name}")
+    elsif item.is_looking_for?
+      buyer.notify('Item Offer', "#{buyer.username} has offered you a #{item.name}")
     end
   end
 end

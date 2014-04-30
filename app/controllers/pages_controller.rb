@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def index
     if user_signed_in?
-      @notifications = current_user.mailbox.notifications
+      @notifications = current_user.mailbox.notifications.unread
       @successful_transactions = current_user.purchases.successful | current_user.sales.successful
       render template:'pages/dashboard'
     end
@@ -9,6 +9,10 @@ class PagesController < ApplicationController
 
   def search
     q = params[:q]
-    @items = Item.search(q, operator:'or', page:params[:page], fields:[{name: :word_start}])
+    @items = Item.search(q,
+                         operator:'or',
+                         page:params[:page],
+                         fields:[{name: :word_start}],
+                         where:{status:'active'})
   end
 end

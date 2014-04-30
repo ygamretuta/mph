@@ -11,3 +11,12 @@ task :reset_allowed_ads do
     end
   end
 end
+
+desc 'Delete all read notifications 1 week old'
+task :delete_1_week_notifications do
+  Notififaction.each do |n|
+    if n.is_read? && n.created_at < 1.week.ago
+      n.delete
+    end
+  end
+end

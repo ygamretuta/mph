@@ -9,8 +9,12 @@
         %ul#dashboard_stats
           %li
             You have
-            = @notifications.count
-            notifications
+            - if @notifications.any?
+              = link_to @notifications.count, notifications_path
+            - else
+              no
+            new notifications
+            = link_to 'View All Notifications', notifications_path
 
           %li
             You have

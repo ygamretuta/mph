@@ -42,7 +42,7 @@ class Item < ActiveRecord::Base
 
   # validates :pictures, length:{minimum:1, maximum: 10}
 
-  scope :available, -> {joins(:transactions).where('transactions.buyer_confirmed IS FALSE OR transactions.seller_confirmed IS FALSE')}
+  scope :available, -> {joins(:transactions).where('transactions.buyer_confirmed IS FALSE OR transactions.seller_confirmed IS FALSE').where('items.active IS TRUE')}
 
   after_create :decrease_allowed_ads
 

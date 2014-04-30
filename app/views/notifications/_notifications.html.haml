@@ -1,0 +1,8 @@
+- if @notifications.any?
+  %ul
+    - @notifications.each do |n|
+      %li
+        = n.body
+        = link_to 'Go to Transactions', user_transactions_path(current_user, notify_read:n.id)
+- else
+  %em.empty You have no notifications

@@ -6,7 +6,11 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = current_user.purchases | current_user.sales
+    if params[:notify_read].present?
+      notification = Notification.find(params[:notify_read]).mark_as_read(current_user)
+    end
+    @successful = current_user.purchases.successful | current_user.sales.successful
+    @pending = current_user.purchases.pending | current_user.sales.pending
   end
 
   # GET /transactions/1

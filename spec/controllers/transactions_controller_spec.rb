@@ -26,10 +26,6 @@ describe TransactionsController do
     end
 
     describe 'GET purchases' do
-      it 'assigns transactions where logged in user is buyer to @transctions' do
-        get :index, {user_id:@user.id}
-        expect(assigns(:transactions)).to eq([transaction])
-      end
     end
   end
 

@@ -1,4 +1,7 @@
 Mbb::Application.routes.draw do
+  get 'notifications/index' => 'notifications#index', as:'notifications'
+  delete 'notifications/destroy'
+
   root 'pages#index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers:{registrations:'registrations', omniauth_callbacks:'users/omniauth_callbacks'}
