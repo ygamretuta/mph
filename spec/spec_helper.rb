@@ -18,6 +18,10 @@ Warden.test_mode!
 
 Capybara.javascript_driver = :poltergeist
 
+FactoryGirl.define do
+  after(:create) {|obj| obj.class.reindex if obj.class.respond_to?(:reindex) }
+end
+
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -38,8 +42,15 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
-    Item.reindex
   end
+
+  config.before(:each, es: true) do
+    if Item.searchkick_index.exists?
+      Item.searchkick_index.delete
+      Item.reindex
+    end
+  end
+
 
   config.before(:each, js:true) do
     DatabaseCleaner.strategy = :transaction

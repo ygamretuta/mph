@@ -20,7 +20,7 @@
 
 FactoryGirl.define do
   sequence :name do |n|
-      "item_#{n}"
+    "Item #{n}"
   end
 
   factory :item do

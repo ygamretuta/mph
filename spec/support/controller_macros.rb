@@ -13,6 +13,7 @@ module ControllerMacros
       @request.env['devise.mapping'] = Devise.mappings[:user]
       @user = FactoryGirl.create(:user)
       @item = FactoryGirl.create(:item, user:@user)
+      Item.searchkick_index.refresh
       sign_in @user
     end
   end
