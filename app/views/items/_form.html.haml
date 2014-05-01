@@ -3,7 +3,7 @@
   .form-inputs
     = f.input :name
     = f.input :ad_type, collection:Item.ad_type.options
-    = f.association :category, :selected => Category.first
+    = f.association :category
     = f.input :price
     = f.input :phone
     = f.input :description

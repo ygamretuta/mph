@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, except:[:index]
   before_action :check_if_owner, only:[:edit, :update]
-  before_action :check_if_can_post, only:[:new, :create]
+  # before_action :check_if_can_post, only:[:new, :create]
 
   # GET /items
   # GET /items.json

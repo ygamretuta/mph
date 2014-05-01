@@ -45,6 +45,7 @@ class Item < ActiveRecord::Base
   scope :available, -> {joins(:transactions).where('transactions.buyer_confirmed IS FALSE OR transactions.seller_confirmed IS FALSE').where('items.active IS TRUE')}
 
   after_create :decrease_allowed_ads
+  before_create :assign_default_category
 
   def to_s
     self.name
@@ -101,6 +102,12 @@ class Item < ActiveRecord::Base
     allowed_ads = user.allowed_ads_today
     if user.allowed_ads_today > 0
       user.update(allowed_ads_today:allowed_ads - 1)
+    end
+  end
+
+  def assign_default_category
+    if self.category.blank?
+      self.category = Category.first
     end
   end
 end

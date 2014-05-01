@@ -75,4 +75,12 @@ describe Item do
       expect(transaction.item.can_be_reserved_by?(user)).to be false
     end
   end
+
+  describe 'assign_default_category' do
+    it 'assigns default category' do
+      category = FactoryGirl.create(:category)
+      item = FactoryGirl.create(:item, category:nil)
+      expect(item.category).to eq(category)
+    end
+  end
 end

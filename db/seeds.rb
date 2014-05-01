@@ -15,9 +15,10 @@ Category.create([
   {name:'Sports'},
   {name:'Pets'},
   {name:'Appliances'},
-  {name:'Mobile Phones'},
+  {name:'Mobile Devices'},
   {name:'Photography'},
-  {name:'Clothing'}
+  {name:'Clothing'},
+  {name:'Books'}
 ])
 
 User.delete_all
