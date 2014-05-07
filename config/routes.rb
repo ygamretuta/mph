@@ -18,6 +18,7 @@ Mbb::Application.routes.draw do
     end
   end
 
+  get '/top_users' => 'users#index', as:'top_users'
   get '/search' => 'pages#search', as:'search'
   get '/profile' => 'users#profile', as:'profile'
   get '/edit_profile'=> 'users#edit', as:'edit_profile'

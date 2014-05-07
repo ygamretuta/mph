@@ -24,6 +24,7 @@ en:
   time:
     formats:
       short: "%B %d, %Y"
+      quite_short: "%B %e, '%y"
   activerecord:
     errors:
       models:

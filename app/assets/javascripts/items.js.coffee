@@ -18,14 +18,25 @@ ready =  ->
   toggleAddPictureLink()
 
   # tooltip
-  $('#items_index').tooltip
-    items: 'a.item_thumb'
-    content: ->
-      position:
-        my: "center bottom-20"
-        at: "center top"
-      element = $(this)
-      return '<img class="th" src="' + element.attr('href') + '"/>'
+  $('.item_thumb').each ->
+    $(this).qtip
+      content:
+        text: '<img src="' + $(this).attr('href') + '"/>'
+      style:
+        classes: 'qtip-plain qtip-bootstrap'
+
+    $('.item_user_link').each ->
+      $(this).qtip
+        style:
+          classes: 'qtip-plain qtip-bootstrap'
+        content:
+          title: $(this).data('username')
+          text: "<dl class='item_user_tooltip'>" +
+                  "<dt>Points:</dt><dd>" + $(this).data('points') + "</dd>" +
+                  "<dt>Date Joined:</dt><dd>" + $(this).data('joined') + "</dd>" +
+                "</dl>"
+
+
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

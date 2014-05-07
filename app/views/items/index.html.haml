@@ -13,16 +13,23 @@
             .row
               .medium-3.columns
                 .items_index_photo
-                  = image_tag item.pictures.first.path.big_thumb.url, class:'th' if item.pictures.count > 0
+                  = image_tag item.pictures.first.path.big_thumb.url, class:'th' if item.pictures.any?
+                %ul.item_thumbs
+                  - if item.pictures.any?
+                    - item.pictures.order(:created_at).to_a[1..-1].each do |p|
+                      - if p.path?
+                        %li= link_to image_tag(p.path.small_thumb.url, class:'th'), image_path(p.path.super_big_thumb.url), class:'item_thumb'
               .medium-7.columns
                 .items_index_details
                   %h4=item.name
+
+                  %p.item_ad_type
+                    %span.item_tag
+                      = item.ad_type.humanize.downcase
+                    %span.item_tag
+                      = item.category.name.downcase
+
                   %p.items_description= item.description
-                  %ul.item_thumbs
-                    - if item.pictures.any?
-                      - item.pictures.order(:created_at).to_a[1..-1].each do |p|
-                        - if p.path?
-                          %li= link_to image_tag(p.path.small_thumb.url, class:'th'), image_path(p.path.super_big_thumb.url), class:'item_thumb'
               .medium-2.columns
                 .items_index_additional_details
                   %p.price= humanized_money_with_symbol item.price
@@ -32,7 +39,10 @@
                       You posted this.
                     - else
                       Posted By:
-                      = link_to item.user.username, user_path(item.user)
+                      = link_to item.user.username, user_path(item.user), class:'item_user_link',
+                        'data-points' => item.user.points,
+                        'data-joined' => l(item.user.created_at, format: :short),
+                        'data-username' => item.user.username
 
                   - if user_signed_in? && item.is_owned_by?(current_user)
                     %ul.item_index_action_links

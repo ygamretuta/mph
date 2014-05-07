@@ -10,6 +10,9 @@
   font-size: 1.5em
   display: block
 
+.items_index_details h4
+  margin-bottom: 0
+
 
 .items_index_additional_details
   text-align: left
@@ -42,6 +45,12 @@
 ul.item_pointers
   list-style: square
 
+.items_index_photo
+  margin-bottom: 10px
+
+ul.item_thumbs
+  margin: 0
+
 ul.item_thumbs li
   display: inline-block
 
@@ -50,6 +59,22 @@ ul.item_thumbs li a
 
 .ui-tooltip
   max-width: 350px
+  border: 1px solid #ccc
+  font-size: 0.75rem
+
+.ui-tooltip-content
+  postion: relative
+
+.ui-tooltip-content::after
+  content: ''
+  position: absolute
+  border-style: solid
+  display: block
+  width:  0
+  top: 50px
+  right: -10px
+  border-color:  transparent #ccc
+  border-width: 10px 0 10px 10px
 
 .filter_header
   font-size: 1.5rem
@@ -61,3 +86,19 @@ ul.item_thumbs li a
   font-size: 0.75rem
   margin-bottom: 10px
   display: block
+
+.item_user_tooltip
+  font-size: 0.75rem
+  font-family: 'Roboto', Arial, sans-serif
+
+.item_ad_type
+  margin: 0
+  padding: 0
+
+.item_tag
+  border-radius: 4px
+  color: #646165
+  display: inline-block
+  padding: 7px 9px
+  margin: 2px
+  background-color: #f2f2ed

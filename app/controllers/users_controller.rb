@@ -2,6 +2,16 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
   before_filter :authenticate_user!, except:[:show]
 
+  def index
+    all_users = User.all.to_a.sort_by{|k|k}.reverse
+    paginated_users = Kaminari.paginate_array(all_users).page(params[:page])
+    users = Array.new
+    all_users.each do |u|
+      users << {username:u.username, points:u.points}
+    end
+    @users = users
+  end
+
   # GET /users/1
   # GET /users/1.json
   def show

@@ -61,6 +61,8 @@ class User < ActiveRecord::Base
     self.email
   end
 
+  scope :top, -> {joins(:points)}
+
 
   # override parent method to allow to searching for email or username
   # https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address
@@ -94,6 +96,10 @@ class User < ActiveRecord::Base
         user.email = data['email'] if user.email.blank?
       end
     end
+  end
+
+  def successful_transactions
+    self.sales.successful | self.purchases.successful
   end
 
   private

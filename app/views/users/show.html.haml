@@ -1,1 +1,13 @@
-%h1= @user.username
+.row
+  .small-10.small-centered.medium-10.medium-centered.large-10.large-centered.columns
+    %h1= @user.username
+    %ul#public_profile_details
+      %li
+        Points:
+        = @user.points
+      %li
+        Successful Transactions:
+        = @user.successful_transactions.count
+      %li
+        Date Joined:
+        = l @user.created_at, format: :quite_short

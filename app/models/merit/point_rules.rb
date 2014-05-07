@@ -27,6 +27,10 @@ module Merit
             to: [:buyer, :seller], category:'transaction_activity'  do |transaction|
         transaction.successful?
       end
+
+      score 5, :on => ['items#create'] do |item|
+        item.persisted?
+      end
     end
   end
 end
