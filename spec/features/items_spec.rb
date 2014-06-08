@@ -14,7 +14,7 @@ feature "Items" do
     attach_file 'item_pictures_attributes_0_path', "#{Rails.root}/app/assets/images/image.jpg"
     click_button 'Post Ad'
     expect(page).to have_content 'Sample Item'
-    expect(find('ul.right li span').text).to eq('5')
+    expect(find('span.points').text).to eq('5')
   end
 
   scenario 'create an invalid item' do
@@ -22,13 +22,13 @@ feature "Items" do
     fill_in 'Name', with:''
     attach_file 'item_pictures_attributes_0_path', "#{Rails.root}/app/assets/images/image.jpg"
     click_button 'Post Ad'
-    expect(find('ul.right li span').text).to eq('0')
+    expect(find('span.points').text).to eq('0')
   end
 
   scenario 'search for an item' do
     visit root_path
     fill_in 'q', with:item.name
-    click_button 'Search For It Here'
+    click_button 'Search'
     expect(page).to have_content item.name
   end
 end

@@ -10,7 +10,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 # 3rd-party gems
-gem 'simple_form'
+gem 'simple_form', '3.1.0.rc1'
 gem 'devise'
 gem 'enumerize'
 gem 'carrierwave'
@@ -35,13 +35,15 @@ gem 'searchkick'
 
 # rails integration of existing libraries
 gem 'haml-rails'
-gem 'foundation-rails'
 gem 'jquery-ui-rails'
 gem 'pg'
 gem 'poltergeist'
 gem 'mandrill-api'
 gem 'omniauth-facebook'
 gem 'money-rails'
+gem 'bootstrap-sass', '~> 3.1.1'
+gem 'google-webfonts-rails'
+gem 'font-awesome-rails'
 
 # public services
 gem 'coveralls', require:false

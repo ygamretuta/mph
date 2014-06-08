@@ -1,6 +1,6 @@
-%form{action:'/search', id:'mbb_search_form'}
-  .row.collapse
-    .small-9.medium-9.columns
-      %input{type:'text', name:'q', placeholder:'What Are You Looking For?', value:search_value}
-    .small-3.medium-3.columns
-      %input.postfix.small.button.expand{type:'submit', value: 'Search For It Here!'}
+%form.form-search.form-inline{action:'/search', id:'mbb_search_form'}
+  .input-group#search_input
+    %input{type:'text', class:'form-control search-query', placeholder:'Search...', name:'q', value:params[:q].present? ? params[:q] : ''}
+    %span.input-group-btn
+      %button{type:'submit', class:'btn btn-primary'}
+        Search

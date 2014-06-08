@@ -1,32 +1,26 @@
+%h1 Dashboard
+
 .row
-  .small-10.small-centered.medium-10.medium-centered.large-10.large-centered.columns
-    = render 'search_form'
+  .col-lg-6
+    %ul#dashboard_stats
+      %li
+        You have
+        - if @notifications.any?
+          = link_to @notifications.count, notifications_path
+        - else
+          no
+        new notifications
+        = link_to 'View All Notifications', notifications_path
 
-    %h1 Dashboard
-
-    .row
-      .small-6.large-6.medium-6.columns
-        %ul#dashboard_stats
-          %li
-            You have
-            - if @notifications.any?
-              = link_to @notifications.count, notifications_path
-            - else
-              no
-            new notifications
-            = link_to 'View All Notifications', notifications_path
-
-          %li
-            You have
-            = current_user.purchases.count
-            purchases
-          %li
-            You have
-            = current_user.sales.count
-            sales
-          %li
-            You have
-            = @successful_transactions.count
-            successful transactions
-
-      .small-6.large-6.medium-6.columns
+      %li
+        You have
+        = current_user.purchases.count
+        purchases
+      %li
+        You have
+        = current_user.sales.count
+        sales
+      %li
+        You have
+        = @successful_transactions.count
+        successful transactions

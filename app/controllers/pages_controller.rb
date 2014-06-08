@@ -8,10 +8,15 @@ class PagesController < ApplicationController
   end
 
   def search
-    q = params[:q]
+    q = params[:q].present? ? params[:q] : '*'
     where_cons = {status:'active'}
+
     if params[:category_id]
       where_cons[:category_id] = params[:category_id]
+    end
+
+    if params[:ad_type]
+      where_cons[:ad_type] = params[:ad_type]
     end
 
     has_min_price = params.has_key?('min_price')

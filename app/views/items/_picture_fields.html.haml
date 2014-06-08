@@ -1,10 +1,10 @@
 .row
-  .small-10.medium-10.columns
+  .col-md-11
     .items_form_pictures_picture
       - if f.object.id? && f.object.path?
         = image_tag f.object.path.medium_thumb.url, class:'th'
       - else
         = f.input :path, label:false
         = f.hidden_field :path_cache
-  .small-2.medium-2.columns
+  .col-md-1
     = f.link_to_remove 'x', title:'Remove Image'

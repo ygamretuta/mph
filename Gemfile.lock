@@ -52,6 +52,8 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.1.1.1)
+      sass (~> 3.2)
     brakeman (2.0.0)
       erubis (~> 2.6)
       fastercsv (~> 1.5)
@@ -162,9 +164,8 @@ GEM
     foreigner (1.6.1)
       activerecord (>= 3.0.0)
     formatador (0.2.4)
-    foundation-rails (5.2.2.0)
-      railties (>= 3.1.0)
-      sass (>= 3.2.0)
+    google-webfonts-rails (0.0.4)
+      activesupport (> 3.2.0, < 5.0)
     guard (2.6.0)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -416,7 +417,7 @@ GEM
       json
       redis (>= 3.0.6)
       redis-namespace (>= 1.3.1)
-    simple_form (3.0.2)
+    simple_form (3.1.0.rc1)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
     simplecov (0.8.2)
@@ -487,6 +488,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
+  bootstrap-sass (~> 3.1.1)
   brakeman
   cancan
   capistrano
@@ -504,7 +506,8 @@ DEPENDENCIES
   enumerize
   factory_girl_rails
   faker
-  foundation-rails
+  font-awesome-rails
+  google-webfonts-rails
   guard-annotate
   guard-brakeman
   guard-livereload
@@ -542,7 +545,7 @@ DEPENDENCIES
   shoulda
   shoulda-matchers
   sidekiq
-  simple_form
+  simple_form (= 3.1.0.rc1)
   thin
   turbolinks
   turbolinks_transitions

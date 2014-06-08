@@ -5,62 +5,65 @@
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %title= content_for?(:title) ? "My PH - #{yield(:title)}" : "My PH"
     = favicon_link_tag
-    %link{href:'http://fonts.googleapis.com/css?family=Roboto', rel:'stylesheet', type:'text/css'}
+    = google_webfonts_init({google:['Roboto']})
     = stylesheet_link_tag "application"
     = stylesheet_link_tag "http://cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.css"
     = csrf_meta_tags
   %body
-    %nav.top-bar{data:{topbar:true}}
-      %ul.title-area
-        %li.name
-          %h1=link_to('my.ph', root_path)
-        %li.toggle-topbar.menu-icon
-          =link_to 'Menu', '#'
-      %section.top-bar-section
-        %ul.right
-          - if user_signed_in?
-            %li.divider
-            %li
-              %span.points
-                = current_user.points
-            %li.divider
-            %li=link_to 'Log Out', destroy_user_session_path, method:'delete'
-            %li.divider
-            %li=link_to 'Post An Ad', new_user_item_path(current_user)
-            %li.divider
-            %li=link_to 'My Ads', user_items_path(current_user)
-            %li.divider
-            %li=link_to 'Profile', profile_path
-            %li.divider
-            %li= link_to 'My Transactions', user_transactions_path(current_user)
-          - else
-            %li.divider
-            %li=link_to 'Sign In', new_user_session_path
-            %li.divider
-            %li=link_to 'Register', new_user_registration_path
 
+    %nav.navbar.navbar-default{role:'navigation'}
+      .container-fluid
+        .navbar-header
+          %button.navbar-toggle{'data-toggle'=>'collapse', 'data-target'=>'#mbb_nav_container'}
+            %span.sr-only
+              Toggle Navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+        = link_to 'my.ph', root_path, class:'navbar-brand'
+
+        .collapse.navbar-collapse#mbb_nav_container
+          %ul.nav.navbar-nav
+            - if user_signed_in?
+              %li
+                %p.navbar-text
+                  %span.points
+                    = current_user.points
+              %li
+                =link_to profile_path do
+                  - if current_user.mailbox.notifications.unread.count > 0
+                    %span.badge.pull-right
+                      = current_user.mailbox.notifications.unread.count
+                  Profile
+              %li=link_to 'Post An Ad', new_user_item_path(current_user)
+              %li=link_to 'My Ads', user_items_path(current_user)
+              %li= link_to 'My Transactions', user_transactions_path(current_user)
+              %li=link_to 'Log Out', destroy_user_session_path, method:'delete'
+            - else
+              %li=link_to 'Sign In', new_user_session_path
+              %li=link_to 'Register', new_user_registration_path
+
+          %ul.nav.navbar-nav.navbar-right
+            %li.pull-right
+              = render 'pages/search_form'
 
     %section#alerts
       - if notice
-        %p.notice.alert-box.info{data:{alert:true}}
+        %p.alert.alert-info
           = notice
-          %a.close{href:'#'}
+          %button.close{type:'button', data:{dismiss:'alert'}}
             ='&times;'.html_safe
       - if alert
-        %p.alert.alert-box.warning{data:{alert:true}}
+        %p.alert.alert.alert-warning
           = alert
-          %a.close{href:'#'}
+          %button.close{type:'button', data:{dismiss:'alert'}}
             ='&times;'.html_safe
-    %section#content
+    %section#content.container
       = yield
-      .push
 
-    .footer
-      .row
-        .medium-4.push-8.columns
-
-        .medium-8.pull-4.columns
-          %p This website is made by Ygam Retuta
+    #footer
+      .container
+        %p This website is made by Ygam Retuta
 
     = javascript_include_tag "application", 'data-turbolinks-eval' => false
     = javascript_include_tag "http://cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.js"

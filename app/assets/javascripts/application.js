@@ -12,12 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require foundation
 //= require turbolinks
 //= require jquery_nested_form
 //= require jquery.ui.datepicker
 //= require turbolinks_transitions
+//= require bootstrap.file-input
+//= require bootstrap/alert
 
 //= require_tree .
 
-$(function(){ $(document).foundation(); });

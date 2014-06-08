@@ -14,5 +14,6 @@ module Mbb
     end
 
     config.i18n.enforce_available_locales = true
+    config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
   end
 end

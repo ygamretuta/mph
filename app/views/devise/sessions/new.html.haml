@@ -1,15 +1,15 @@
-.row
-  .large-5.large-centered.small-5.small-centered.medium-5.medium-centered.columns
-    %h2 Sign in
-    = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-      .form-inputs
-        = f.input :login, :required => false, :autofocus => true
-        = f.input :password, :required => false
-        - if devise_mapping.rememberable?
-          .input.optional.user_remember_me
+.center-block.centered_form
+  %h2 Sign in
+  = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+    .form-inputs
+      = f.input :login, :required => false, :autofocus => true
+      = f.input :password, :required => false
+      - if devise_mapping.rememberable?
+        .checkbox
+          %label{:for=>'user_remember_me'}
             %input{type:'hidden', value:0, name:'user[remember_me]'}
             %input{type:'checkbox', value:1, name:'user[remember_me]', id:'user_remember_me'}
-            %label.boolean.optional.control-label.checkbox{:for=>'user_remember_me'}Remember Me
-      .form-actions
-        = f.button :submit, "Sign in", class:'button tiny'
-    = render "devise/shared/links"
+            Remember Me
+    .form-actions
+      = f.button :submit, "Sign in", class:'button tiny'
+  = render "devise/shared/links"

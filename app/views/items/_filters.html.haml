@@ -1,17 +1,21 @@
 %h1.filter_header Filter Results
 
 = form_tag '/search', method: :get, id:'search_filter' do
-  %ul#search_filter_fields
-    %li
-      = label_tag 'category_id', 'Category'
-      = select_tag(:category_id, options_from_collection_for_select(Category.all, :id, :name))
-    %li
-      = label_tag 'min_price', 'Minimum Price'
-      = number_field_tag :min_price, 1000
-    %li
-      = label_tag 'max_price', 'Maximum Price'
-      = number_field_tag :max_price, 100000
-      - if params[:q]
-        = hidden_field_tag :q, params[:q]
-    %li
-      = submit_tag 'Filter Results', class:'button tiny'
+  .form-group
+    = label_tag 'category_id', 'Category'
+    = select_tag(:category_id, options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), class:'form-control')
+  .form-group
+    = label_tag 'ad_type', 'Ad Type'
+    = select_tag(:ad_type,
+      options_for_select([['For Sale', 'for_sale'], ['Looking For', 'looking_for'], ['For Swap', 'swap']],
+        params[:ad_type]), class:'form-control')
+  .form-group
+    = label_tag 'min_price', 'Minimum Price'
+    = number_field_tag :min_price, params[:min_price].present? ? params[:min_price] : 1000, class:'form-control'
+  .form-group
+    = label_tag 'max_price', 'Maximum Price'
+    = number_field_tag :max_price, params[:max_price].present? ? params[:max_price] : 1000000, class:'form-control'
+    - if params[:q]
+      = hidden_field_tag :q, params[:q]
+  .form-group
+    = submit_tag 'Filter Results', class:'btn btn-default'

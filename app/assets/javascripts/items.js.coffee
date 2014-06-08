@@ -19,22 +19,30 @@ ready =  ->
 
   # tooltip
   $('.item_thumb').each ->
-    $(this).qtip
-      content:
-        text: '<img src="' + $(this).attr('href') + '"/>'
-      style:
-        classes: 'qtip-plain qtip-bootstrap'
-
-    $('.item_user_link').each ->
       $(this).qtip
+        position:
+          viewport: $(window)
+        adjust:
+          screen: true
+        content:
+          text: '<img class="img-responsive" src="' + $(this).attr('href') + '"/>'
         style:
           classes: 'qtip-plain qtip-bootstrap'
-        content:
-          title: $(this).data('username')
-          text: "<dl class='item_user_tooltip'>" +
-                  "<dt>Points:</dt><dd>" + $(this).data('points') + "</dd>" +
-                  "<dt>Date Joined:</dt><dd>" + $(this).data('joined') + "</dd>" +
-                "</dl>"
+
+  $('.item_user_link').each ->
+    $(this).qtip
+      adjust:
+        screen: true
+      style:
+        classes: 'qtip-plain qtip-bootstrap'
+      content:
+        title: $(this).data('username')
+        text: "<dl class='item_user_tooltip'>" +
+                "<dt>Points:</dt><dd>" + $(this).data('points') + "</dd>" +
+                "<dt>Date Joined:</dt><dd>" + $(this).data('joined') + "</dd>" +
+              "</dl>"
+
+$('#nested_pictures input[type=file]').bootstrapFileInput()
 
 
 

@@ -1,13 +1,12 @@
-.row
-  .large-5.large-centered.small-5.small-centered.medium-5.medium-centered.columns
-    %h2 Sign up
-    = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-      = f.error_notification
-      .form-inputs
-        = f.input :username, required:true, :autofocus => true
-        = f.input :email, :required => true
-        = f.input :password, :required => true
-        = f.input :password_confirmation, :required => true
-      .form-actions
-        = f.button :submit, "Sign up", class:'button tiny'
-    = render "devise/shared/links"
+.center-block.centered_form
+  %h2 Sign up
+  = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+    = f.error_notification
+    .form-inputs
+      = f.input :username, required:true, :autofocus => true
+      = f.input :email, :required => true
+      = f.input :password, :required => true
+      = f.input :password_confirmation, :required => true
+    .form-actions
+      = f.button :submit, "Sign up", class:'button tiny'
+  = render "devise/shared/links"

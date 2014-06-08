@@ -1,8 +1,8 @@
 .row
-  .large-2.medium-3.columns
+  .col-md-2
     = render 'items/filters'
 
-  .large-10.medium-9.columns
+  .col-md-10
     - if @items.any?
       .pagination-centered
         = paginate @items
@@ -11,26 +11,36 @@
         - @items.each do |item|
           .items_index_item
             .row
-              .medium-3.columns
+              .col-md-3
                 .items_index_photo
-                  = image_tag item.pictures.first.path.big_thumb.url, class:'th' if item.pictures.any?
+                  = image_tag item.pictures.first.path.big_thumb.url, class:'img-responsive' if item.pictures.any?
                 %ul.item_thumbs
                   - if item.pictures.any?
                     - item.pictures.order(:created_at).to_a[1..-1].each do |p|
                       - if p.path?
-                        %li= link_to image_tag(p.path.small_thumb.url, class:'th'), image_path(p.path.super_big_thumb.url), class:'item_thumb'
-              .medium-7.columns
+                        %li= link_to image_tag(p.path.small_thumb.url, class:'img-responsive'), image_path(p.path.super_big_thumb.url), class:'item_thumb'
+              .col-md-7
                 .items_index_details
-                  %h4=item.name
+                  %h3=item.name
 
                   %p.item_ad_type
                     %span.item_tag
                       = item.ad_type.humanize.downcase
                     %span.item_tag
                       = item.category.name.downcase
+                    - if item.sold?
+                      - if item.is_for_sale?
+                        %span.item_tag
+                          sold
+                      - if item.is_for_swap?
+                        %span.item_tag
+                          swapped
+                      - if item.is_looking_for?
+                        %span.item_tag
+                          found
 
                   %p.items_description= item.description
-              .medium-2.columns
+              .col-md-2
                 .items_index_additional_details
                   %p.price= humanized_money_with_symbol item.price
 

@@ -25,7 +25,7 @@ feature "Transactions" do
   def create_transaction
     visit root_path
     fill_in 'q', with: item.name
-    click_button 'Search For It Here'
+    click_button 'Search'
     expect(page).to have_content item.name
     click_link 'Reserve'
     expect(page).to have_content item.name

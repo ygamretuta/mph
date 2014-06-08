@@ -1,18 +1,15 @@
-.row
-  = simple_form_for([current_user, @item, @transaction]) do |f|
-    = f.error_notification
+= simple_form_for([current_user, @item, @transaction]) do |f|
+  = f.error_notification
 
-    .form-inputs
-      .row
-        .small-6.medium-6.columns
-          = f.input :transaction_date, as: :string, :input_html => {id:'transaction_datepicker'}
-          - if @item.is_for_sale?
-            = f.input :buyer_id, as: :hidden, :input_html => {value:current_user.id}
-            = f.input :seller_id, as: :hidden, :input_html => {value:@item.user.id}
-          - else
-            = f.input :buyer_id, as: :hidden, :input_html => {value:@item.user.id}
-            = f.input :seller_id, as: :hidden, :input_html => {value:current_user.id}
-          = f.input :item_id, as: :hidden, :input_html => {value:@item.id}
+  .form-inputs
+    = f.input :transaction_date, as: :string, :input_html => {id:'transaction_datepicker'}
+    - if @item.is_for_sale?
+      = f.input :buyer_id, as: :hidden, :input_html => {value:current_user.id}
+      = f.input :seller_id, as: :hidden, :input_html => {value:@item.user.id}
+    - else
+      = f.input :buyer_id, as: :hidden, :input_html => {value:@item.user.id}
+      = f.input :seller_id, as: :hidden, :input_html => {value:current_user.id}
+    = f.input :item_id, as: :hidden, :input_html => {value:@item.id}
 
-    .form-actions
-      = f.button :submit, class:'button tiny'
+  .form-actions
+    = f.button :submit, class:'button tiny'

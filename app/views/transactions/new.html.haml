@@ -1,5 +1,4 @@
-.row
-  .small-6.small-centered.medium-6.medium-centered.large-6.large-centered.columns
-    %p.notice= "you are reserving #{@item.name}"
-    = render 'form'
+.center-block.centered_form
+  %p.alert.alert-info= "you are reserving #{@item.name}"
+  = render 'form'
 

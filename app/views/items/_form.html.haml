@@ -1,17 +1,16 @@
-= simple_nested_form_for([current_user, @item]) do |f|
+= simple_nested_form_for([current_user, @item], html:{id:'item_form '}) do |f|
   = f.error_notification
-  .form-inputs
-    = f.input :name
-    = f.input :ad_type, collection:Item.ad_type.options
-    = f.association :category
-    = f.input :price
-    = f.input :phone
-    = f.input :description
+  = f.input :name
+  = f.input :ad_type, collection:Item.ad_type.options
+  = f.association :category
+  = f.input :price
+  = f.input :phone
+  = f.input :description
 
-    #nested_pictures
-      = f.simple_fields_for :pictures
-
-    = f.link_to_add 'Add More Pictures', :pictures, 'data-target' => '#nested_pictures', class:'items_add_pictures'
+  %h4 Add Pictures
+  #nested_pictures
+    = f.simple_fields_for :pictures
+  = f.link_to_add 'Add More Pictures', :pictures, 'data-target' => '#nested_pictures', class:'items_add_pictures'
 
 
   .form-actions

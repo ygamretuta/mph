@@ -1,7 +1,3 @@
-.row
-  .large-12.medium-12.columns.large-centered.medium-centered
-    = render 'search_form'
-
 - if @items.any?
   = render :template => 'items/index', :items => @items
 - else

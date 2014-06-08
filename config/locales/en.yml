@@ -36,3 +36,6 @@ en:
           attributes:
             transaction_date:
               on_or_after: "Transaction date must be today or in the future."
+  mailboxer:
+    notification_mailer:
+      subject:  'My PH Notifications: %{subject}'
